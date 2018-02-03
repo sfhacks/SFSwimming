@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Roster </h1>
+
+<ul>
+
+{% for player in roster %}
+    <li> {{ player.name }} </li>
+{% endfor %}
+
+</ul>
+
+
+{% endblock %}
