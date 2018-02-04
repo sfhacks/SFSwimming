@@ -1,0 +1,35 @@
+body {
+    margin: 0px;
+}
+
+#content {
+    margin-left: 5%;
+}
+
+#header-bar {
+    /* width: 100%; */
+    background-color: #41aae2;
+    padding: 10px 30px;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#login-box {
+    margin-top: 10px;
+}
+
+.header-link {
+    color: white;
+    margin-left: 10px;
+}
+
+input[type=text],input[type='password']{
+  border: 1px solid grey;
+  border-radius: 5px;
+  /* background-color: lightgrey; */
+  outline: none;
+  height: 25px;
+  padding: 0px 5px;

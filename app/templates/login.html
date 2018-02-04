@@ -5,11 +5,14 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-<form action="/login" method="POST">
-  <input type="username" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password">
-  <input type="submit" value="Log in">
-</form>
+<div id = "login-box">
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="Username">
+      <input type="password" name="password" placeholder="Password">
+      <input type="submit" value="Log in">
+    </form>
+</div>
+
 {% endif %}
 
 

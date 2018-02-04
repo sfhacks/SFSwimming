@@ -6,9 +6,19 @@
 <head>
 
 <body>
-    {% if not hideLogout %}
-        <a href = "/logout">Logout<a>
-    {% endif %}
+    <div id = "header-bar">
+
+        <div id = "header-bar-left">
+            SFSwim 🏊‍♂️
+            <a href = "/roster" class = "header-link">Roster</a>
+            <a href = "/times" class = "header-link">Times</a>
+        </div>
+
+        {% if not hideLogout %}
+            <a href = "/logout" id = "logout" class = "header-link">Logout</a>
+        {% endif %}
+    </div>
+
     <div id="content">{% block content %}{% endblock %}</div>
 </body>
 </html>
