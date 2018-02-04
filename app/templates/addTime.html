@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Add Time </h1>
+
+<form action="/addTime" method="POST">
+  <input list="swimmers">
+  <datalist id="swimmers">
+       {% for swimmer in swimmers %}
+       <option value="{{swimmer.name}}">
+       {% endfor %}
+ </datalist>
+  <input type="text" name="stroke" placeholder="Stroke">
+  <input type="number" name="event" placeholder="Event (e.g. 50, 100)"> <!-- Honestly, we could combine stroke and event -->
+  <input type="submit" value="Add Swimmer">
+</form>
+
+
+{% endblock %}
