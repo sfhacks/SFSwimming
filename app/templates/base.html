@@ -6,7 +6,9 @@
 <head>
 
 <body>
-     hello
+    {% if not hideLogout %}
+        <a href = "/logout">Logout<a>
+    {% endif %}
     <div id="content">{% block content %}{% endblock %}</div>
 </body>
 </html>
