@@ -75,21 +75,15 @@ def logout():
 def list_all_times():
     # Database+template code for all times
 
-    Timer.start()
 
     events_processed = []
     for event in events:
         name = event['stroke'] + " " + str(event['distance'])
         times = getTopPlayers(stroke = event['stroke'], distance = event['distance'])
         events_processed.append({"name": name, "times": times})
-
     roster = getRoster()
 
-    Timer.end()
-
-    Timer.start()
     template =  render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100], events = events_processed)
-    Timer.end()
 
     return template
 
