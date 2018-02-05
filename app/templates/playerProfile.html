@@ -7,23 +7,13 @@
 <!-- Insert graph here -->
 
 <table>
-     <tr bgcolor = "#">
-          <td>Trial</td>
+     <tr >
           <td>Time</td>
      </tr>
-     {% for index, value in zip(range(1, len(data)+1), data) %}
-     {% if value % 2 %}
-     <tr bgcolor = "#">
-          <td>{{index}}</td>
-          <td>{{value}}</td>
-     </tr>
-     {% else %}
-     <tr bgcolor = "#">
-          <td>{{index}}</td>
-          <td>{{value}}</td>
-     </tr>
-     {% endif %}
-
+     {% for value in data%}
+         <tr >
+              <td>{{value.time}}</td>
+         </tr>
 
      {% endfor %}
 

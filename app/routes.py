@@ -88,7 +88,7 @@ def list_all_times():
     Timer.end()
 
     Timer.start()
-    template =  render_template('times.html', roster = roster, strokes = ["Free", "Fly"], distances = [50, 100], events = events_processed)
+    template =  render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100], events = events_processed)
     Timer.end()
 
     return template
@@ -97,15 +97,24 @@ def list_all_times():
 @requires_auth
 def add_time():
     print(request.form)
+    player = getPlayer(request.form["name"])
+    addStroke(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id)
     return redirect("/times")
 
-@app.route('/addTime', methods=['POST']) # Never direct link here w/o request data -> Form request destination for adding times
+@app.route('/player', methods=['GET'])
 @requires_auth
-def addTime():
-    if not request:
-        abort(400)
-    # add database code to add swimmer time - see login for how to interact with form
-    return add_time_menu()
+def player():
+
+    id = request.args.get('id')
+    player = getPlayerById(id)
+    stroke = request.args.get('stroke')
+    distance = request.args.get('distance')
+
+    times = getAllTimesForPlayer(stroke,float(distance),id)
+
+    print(player.name)
+
+    return render_template("playerProfile.html", swimmer = player, stroke = stroke + " " + distance, data = times)
 
 def validate_pwd(password):
     return hashlib.md5(password.encode()).hexdigest() == hashed_pwd

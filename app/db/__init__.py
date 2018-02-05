@@ -18,7 +18,10 @@ def addPlayer(name):
     Player(name=name).save()
 
 def getPlayer(name):
-    return Player.objects(name = name)
+    return Player.objects(name = name)[0]
+
+def getPlayerById(id):
+    return Player.objects(id = id)[0]
 
 def addStroke(stroke, distance, time, player_id):
     Time(stroke=stroke, distance=distance, time=time, player=player_id).save()
@@ -28,3 +31,6 @@ def getSortedStrokes(stroke, distance, player_id = None):
         return Time.objects(stroke=stroke, distance=distance, player=player_id).order_by("time").limit(5)
     else:
         return Time.objects(stroke=stroke, distance=distance).order_by("time").limit(5)
+
+def getAllTimesForPlayer(stroke, distance, player_id):
+        return Time.objects(stroke=stroke, distance=distance, player=player_id)
