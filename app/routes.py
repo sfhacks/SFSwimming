@@ -19,7 +19,7 @@ class Timer():
 
 
 hashed_pwd = '763e6715ab44cd899ae1b172cc78d5a7'
-disable_login = False
+disable_login = True
 events = [
     {"stroke": "free", "distance": 50},
     {"stroke": "free", "distance": 100},
@@ -104,12 +104,15 @@ def player():
     player = getPlayerById(id)
     stroke = request.args.get('stroke')
     distance = request.args.get('distance')
+    labels_graph = ["January","February","March","April","May","June","July","August"]
 
     times = getAllTimesForPlayer(stroke,float(distance),id)
+    #times = [10,9,8,7,6,4,7,8]
 
     print(player.name)
+    print (times)
 
-    return render_template("playerProfile.html", swimmer = player, stroke = stroke + " " + distance, data = times)
+    return render_template("playerProfile.html", swimmer = player, stroke = stroke + " " + distance, values = times, labels = labels_graph)
 
 def validate_pwd(password):
     return hashlib.md5(password.encode()).hexdigest() == hashed_pwd
