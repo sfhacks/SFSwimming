@@ -6,6 +6,7 @@ from app.db import *
 import hashlib
 import time
 
+# used for profiling
 class Timer():
     time = 0
     @staticmethod
@@ -18,7 +19,7 @@ class Timer():
 
 
 hashed_pwd = '763e6715ab44cd899ae1b172cc78d5a7'
-disable_login = True
+disable_login = False
 events = [
     {"stroke": "free", "distance": 50},
     {"stroke": "free", "distance": 100},
@@ -26,6 +27,7 @@ events = [
     {"stroke": "fly", "distance": 100}
 ]
 
+# use this decorator on routes that are protected
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -46,7 +48,6 @@ def roster():
 
 @app.route('/roster', methods=['POST'])
 def add_swimmer():
-    # add database code to add swimmer - see login for how to interact with form data
     addPlayer(name = request.form['name'])
     return redirect("/roster")
 
