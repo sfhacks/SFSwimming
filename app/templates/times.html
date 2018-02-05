@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Times </h1>
+
+<form action="/times" method="POST">
+    <select >
+        {% for player in roster %}
+            <option>{{player.name}}</option>
+        {% endfor %}
+    </select>
+    <select>
+        {% for stroke in strokes %}
+            <option>{{stroke}}</option>
+        {% endfor %}
+    </select>
+    <select>
+        {% for distance in distances %}
+            <option>{{distance}}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="name" placeholder="Time">
+    <input type="submit" value="Add Time">
+
+</form>
+
+
+
+    {% for event in events %}
+        <h3>{{event.name}}</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Time</th>
+            </tr>
+
+            {% for time in event.times %}
+            <tr>
+                <td>{{time.player.name}}</td>
+                <td>{{'%0.2f'| format(time.time)}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% endfor %}
+
+
+
+
+{% endblock %}

@@ -4,9 +4,27 @@ from flask import flash, redirect, render_template, request, session, abort
 from app import app
 from app.db import *
 import hashlib
+import time
+
+class Timer():
+    time = 0
+    @staticmethod
+    def start():
+        Timer.time = time.time()
+
+    @staticmethod
+    def end():
+        print(time.time()-Timer.time)
+
 
 hashed_pwd = '763e6715ab44cd899ae1b172cc78d5a7'
-disable_login = False
+disable_login = True
+events = [
+    {"stroke": "free", "distance": 50},
+    {"stroke": "free", "distance": 100},
+    {"stroke": "fly", "distance": 50},
+    {"stroke": "fly", "distance": 100}
+]
 
 def requires_auth(f):
     @wraps(f)
@@ -52,16 +70,34 @@ def logout():
     session['logged_in'] = False
     return redirect("/login")
 
-@app.route('/times')
+@app.route('/times', methods=['GET'])
 @requires_auth
 def list_all_times():
     # Database+template code for all times
-    pass
 
-@app.route('/add') # Landing page for adding times
+    Timer.start()
+
+    events_processed = []
+    for event in events:
+        name = event['stroke'] + " " + str(event['distance'])
+        times = getSortedStrokes(stroke = event['stroke'], distance = event['distance'])
+        events_processed.append({"name": name, "times": times})
+
+    roster = getRoster()
+
+    Timer.end()
+
+    Timer.start()
+    template =  render_template('times.html', roster = roster, strokes = ["Free", "Fly"], distances = [50, 100], events = events_processed)
+    Timer.end()
+
+    return template
+
+@app.route('/times', methods=['POST'])
 @requires_auth
-def add_time_menu():
-    return render_template('addTime.html', swimmers = getRoster())
+def add_time():
+    print(request.form)
+    return redirect("/times")
 
 @app.route('/addTime', methods=['POST']) # Never direct link here w/o request data -> Form request destination for adding times
 @requires_auth
