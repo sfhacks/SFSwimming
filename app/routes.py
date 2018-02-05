@@ -80,7 +80,7 @@ def list_all_times():
     events_processed = []
     for event in events:
         name = event['stroke'] + " " + str(event['distance'])
-        times = getSortedStrokes(stroke = event['stroke'], distance = event['distance'])
+        times = getTopPlayers(stroke = event['stroke'], distance = event['distance'])
         events_processed.append({"name": name, "times": times})
 
     roster = getRoster()
@@ -98,7 +98,7 @@ def list_all_times():
 def add_time():
     print(request.form)
     player = getPlayer(request.form["name"])
-    addStroke(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id)
+    addTime(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id)
     return redirect("/times")
 
 @app.route('/player', methods=['GET'])
