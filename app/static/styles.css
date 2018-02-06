@@ -22,8 +22,20 @@ body {
     margin-top: 10px;
 }
 
-table, th, td {
-    border: 1px solid black;
+ td,  th {
+    padding: 8px;
+}
+
+ tr:nth-child(even){background-color: #f2f2f2;}
+
+ tr:hover {background-color: #ddd;}
+
+ th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #41aae2;
+    color: white;
 }
 
 .header-link {

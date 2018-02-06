@@ -112,7 +112,7 @@ def player():
     print(player.name)
     print (times)
 
-    return render_template("playerProfile.html", swimmer = player, stroke = stroke + " " + distance, values = times, labels = labels_graph)
+    return render_template("playerProfile.html", swimmer = player, stroke = stroke + " " + distance, values = times)
 
 def validate_pwd(password):
     return hashlib.md5(password.encode()).hexdigest() == hashed_pwd
