@@ -75,18 +75,17 @@ def logout():
 @requires_auth
 def list_all_times():
     # Database+template code for all times
-
-
-    events_processed = []
-    for event in events:
-        name = event['stroke'] + " " + str(event['distance'])
-        times = getTopPlayers(stroke = event['stroke'], distance = event['distance'])
-        events_processed.append({"name": name, "times": times})
     roster = getRoster()
 
-    template =  render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100], events = events_processed)
+    template =  render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100])
 
     return template
+
+@app.route('/event', methods=['GET'])
+@requires_auth
+def show_event():
+	stroke = request.args.get('stroke')
+	return render_template('event.html', stroke=stroke, events=) # TODO - add queried events as parameter
 
 @app.route('/times', methods=['POST'])
 @requires_auth

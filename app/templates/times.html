@@ -26,27 +26,4 @@
 
 </form>
 
-
-
-    {% for event in events %}
-        <h3>{{event.name}}</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Time</th>
-            </tr>
-
-            {% for time in event.times %}
-            <tr>
-                <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-                <td>{{'%0.2f'| format(time.time)}}</td>
-            </tr>
-            {% endfor %}
-
-        </table>
-    {% endfor %}
-
-
-
-
 {% endblock %}
