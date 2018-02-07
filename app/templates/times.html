@@ -5,12 +5,11 @@
 <h1> Times </h1>
 
 <form action="/times" method="POST">
-     <input list="swimmers" placeholder="Swimmer Name">
-    <datalist id="swimmers">
+    <select name="name">
         {% for player in roster %}
-            <option value = "{{player.name}}">
+            <option>{{player.name}}</option>
         {% endfor %}
-   </datalist>
+    </select>
     <select name="stroke">
         {% for stroke in strokes %}
             <option>{{stroke}}</option>

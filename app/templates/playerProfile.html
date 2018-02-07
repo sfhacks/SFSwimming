@@ -2,13 +2,16 @@
 
 {% block content %}
 
+<h1> {{swimmer.name}} - {{stroke | capitalize}} </h1> <!-- In this case, stroke being something like '50 free'-->
 
-<h1> {{swimmer.name}} - {{stroke}} </h1> <!-- In this case, stroke being something like '50 free'-->
 
-<script src='static/Chart.min.js'></script>
-<canvas id="chart" width="600" height="400"></canvas>
+<div id = "profile-container">
 
-<script>
+
+    <script src='static/Chart.min.js'></script>
+    <canvas id="chart" width="600" height="400"></canvas>
+
+    <script>
 
     all = [{% for item in values %} {{item.time}}, {% endfor %}]
 
@@ -25,43 +28,44 @@
                 bezierCurve : false,
                 data : all.reverse().slice(all.length-10, all.length)
             }]
-    }
+        }
 
-    // Chart.defaults.global.animationSteps = 50;
-    Chart.defaults.global.tooltipYPadding = 16;
-    Chart.defaults.global.tooltipCornerRadius = 0;
-    Chart.defaults.global.tooltipTitleFontStyle = "normal";
-    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
-    // Chart.defaults.global.animationEasing = "easeOutBounce";
-    Chart.defaults.global.responsive = false;
-    Chart.defaults.global.scaleLineColor = "black";
-    Chart.defaults.global.scaleFontSize = 16;
+        // Chart.defaults.global.animationSteps = 50;
+        Chart.defaults.global.tooltipYPadding = 16;
+        Chart.defaults.global.tooltipCornerRadius = 0;
+        Chart.defaults.global.tooltipTitleFontStyle = "normal";
+        Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+        // Chart.defaults.global.animationEasing = "easeOutBounce";
+        Chart.defaults.global.responsive = false;
+        Chart.defaults.global.scaleLineColor = "black";
+        Chart.defaults.global.scaleFontSize = 16;
 
-    var mychart = document.getElementById("chart").getContext("2d");
+        var mychart = document.getElementById("chart").getContext("2d");
 
-    // draw bar chart
-    var LineChartDemo = new Chart(mychart).Line(data, {
-        scaleShowVerticalLines: true,
-        scaleShowGridLines : true,
-        scaleShowLabels: true,
-        bezierCurve: false,
-    });
+        // draw bar chart
+        var LineChartDemo = new Chart(mychart).Line(data, {
+            scaleShowVerticalLines: true,
+            scaleShowGridLines : true,
+            scaleShowLabels: true,
+            bezierCurve: false,
+        });
 
 
-</script>
+    </script>
 
-<table>
-    <tr >
-        <td>Time</td>
-    </tr>
-    {% for value in values%}
-    <tr >
-        <td>{{value.time}}</td>
-    </tr>
+    <table>
+        <tr >
+            <th>Time (Most recent)</th>
+        </tr>
+        {% for value in values%}
+        <tr >
+            <td>{{'%0.2f'| format(value.time)}} sec</td>
+        </tr>
 
-    {% endfor %}
+        {% endfor %}
 
-</table>
+    </table>
 
+</div>
 
 {% endblock %}

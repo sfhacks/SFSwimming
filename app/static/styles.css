@@ -18,6 +18,14 @@ body {
     justify-content: space-between;
 }
 
+#event-header-bar {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #8ec7e5;
+    margin-left: -5.263157894%;
+    padding: 10px 10px;
+}
+
 #login-box {
     margin-top: 10px;
 }
@@ -30,17 +38,35 @@ body {
 
  tr:hover {background-color: #ddd;}
 
- th {
+th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
     background-color: #41aae2;
     color: white;
+    font-weight: bold;
 }
 
 .header-link {
     color: white;
     margin-left: 10px;
+}
+
+#event-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.event-box {
+    padding-right: 20px;
+}
+
+#profile-container {
+    display: flex;
+}
+
+#profile-container table {
+    width: 200px;
 }
 
 input[type=text],input[type='password']{

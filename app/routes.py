@@ -39,7 +39,7 @@ def requires_auth(f):
 @app.route('/')
 @requires_auth
 def index():
-    return render_template('base.html')
+    return redirect('/times')
 
 @app.route('/roster', methods=['GET'])
 @requires_auth
@@ -76,16 +76,22 @@ def logout():
 def list_all_times():
     # Database+template code for all times
     roster = getRoster()
-
-    template =  render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100])
-
+    template = render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100])
     return template
 
 @app.route('/event', methods=['GET'])
 @requires_auth
 def show_event():
-	stroke = request.args.get('stroke')
-	return render_template('event.html', stroke=stroke, events=) # TODO - add queried events as parameter
+    stroke = request.args.get('stroke')
+    data = []
+    for event in events:
+        if event["stroke"] == stroke:
+            data.append({
+            "name": stroke + " " + str(event["distance"]),
+            "times": getTopPlayers(stroke, event["distance"])
+            })
+
+    return render_template('event.html', stroke=stroke, events=data)
 
 @app.route('/times', methods=['POST'])
 @requires_auth

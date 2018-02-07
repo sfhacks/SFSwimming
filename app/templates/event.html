@@ -2,32 +2,38 @@
 
 {% block content %}
 
-<div id = "header-bar">
+<div id = "event-header-bar">
      <a href="/event?stroke=free" class="header-link">Freestroke</a>
-     <a href="/event?stroke=back" class="header-link">Backstroke</a>
+     <!-- <a href="/event?stroke=back" class="header-link">Backstroke</a> -->
      <a href="/event?stroke=fly" class="header-link">Butterfly</a>
-     <a href="/event?stroke=breast" class="header-link">Breaststroke</a>
+     <!-- <a href="/event?stroke=breast" class="header-link">Breaststroke</a> -->
 </div>
 
-<h1> {{stroke}} </h1>
+<h1> {{stroke | capitalize}} </h1>
 
+<div id = "event-container">
     {% for event in events %}
-        <h3>{{event.name}}</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Time</th>
-            </tr>
+        <div class = "event-box">
+            <h3>{{event.name | capitalize}}</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Time</th>
+                </tr>
 
-            {% for time in event.times %}
-            <tr>
-                <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-                <td>{{'%0.2f'| format(time.time)}}</td>
-           </tr>
-            {% endfor %}
+                {% for time in event.times %}
+                <tr>
+                    <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
+                    <td>{{'%0.2f'| format(time.time)}}</td>
+               </tr>
+                {% endfor %}
 
-        </table>
+            </table>
+        </div>
+
     {% endfor %}
+</div>
+
 
 
 
