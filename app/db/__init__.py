@@ -1,8 +1,12 @@
 from mongoengine import *
 import time
 
-# Faster
-connect(host="db:27017")
+import os
+
+if not os.environ.get('DOCKER'):
+    connect(host="localhost:27017")
+else:
+    connect(host="db:27017")
 
 #Slower
 
