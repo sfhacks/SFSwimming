@@ -2,6 +2,7 @@ version: "3"
 services:
     web:
       build: .
+      image: arnavg/sfswimming
       command: python -u run.py
       ports:
         - "5000:5000"
