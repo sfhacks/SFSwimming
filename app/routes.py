@@ -109,10 +109,7 @@ def player():
     player = getPlayerById(id)
     stroke = request.args.get('stroke')
     distance = request.args.get('distance')
-    labels_graph = ["January","February","March","April","May","June","July","August"]
-
     times = getAllTimesForPlayer(stroke,float(distance),id)
-    #times = [10,9,8,7,6,4,7,8]
 
     print(player.name)
     print (times)

@@ -2,7 +2,7 @@ from mongoengine import *
 import time
 
 # Faster
-connect(host="localhost:27017")
+connect(host="db:27017")
 
 #Slower
 
