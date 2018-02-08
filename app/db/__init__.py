@@ -1,8 +1,12 @@
 from mongoengine import *
 import time
 
-# Faster
-connect(host="db:27017")
+import os
+
+if not os.environ.get('DOCKER'):
+    connect(host="localhost:27017")
+else:
+    connect(host="db:27017")
 
 #Slower
 
@@ -33,6 +37,13 @@ def getPlayer(name):
 
 def getPlayerById(id):
     return Player.objects.get(id=id)
+
+def deletePlayer(name):
+    p = Player.objects.get(name=name)
+    times = Time.objects(player=p)
+    for time in times:
+        time.delete()
+    p.delete()
 
 def getTopPlayers(stroke, distance):
     players = []

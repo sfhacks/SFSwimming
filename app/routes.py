@@ -51,6 +51,14 @@ def add_swimmer():
     addPlayer(name = request.form['name'])
     return redirect("/roster")
 
+
+@app.route('/roster', methods=['DELETE'])
+def delete_swimmer():
+    name = request.args["name"]
+    deletePlayer(name)
+
+    return "Success", 200
+
 @app.route('/login', methods=['GET'])
 def login():
     return render_template('login.html', hideLogout = True)
