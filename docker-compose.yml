@@ -1,13 +1,9 @@
 version: "3"
 services:
     web:
-      build: .
-      image: arnavg/sfswimming
-      command: python -u run.py
+      image: "arnavg/sfswimming"
       ports:
         - "5000:5000"
-      volumes:
-        - .:/code
       links:
         - db
     db:
