@@ -4,7 +4,7 @@ body {
 }
 
 #content {
-    margin-left: 5%;
+    margin: 0% 5vw;
 }
 
 #header-bar {
@@ -22,11 +22,15 @@ body {
     display: flex;
     justify-content: flex-start;
     background-color: #8ec7e5;
-    margin-left: -5.263157894%;
+    margin-left: -5vw;
     padding: 10px 10px;
 }
 
 #login-box {
+    margin-top: 10px;
+}
+
+#roster-table {
     margin-top: 10px;
 }
 
@@ -69,6 +73,26 @@ th {
     width: 200px;
 }
 
+.player-row {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.player-row:nth-child(odd){background-color: #f2f2f2;}
+
+.delete-button {
+    color: white;
+    background-color: #f44242;
+    padding: 3px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 50px;
+}
+
 input[type=text],input[type='password']{
   border: 1px solid grey;
   border-radius: 5px;
@@ -76,3 +100,43 @@ input[type=text],input[type='password']{
   outline: none;
   height: 25px;
   padding: 0px 5px;
+}
+
+
+/*
+ *
+ *  Modal
+ *
+ */
+
+
+ /* Modal Content */
+ .modal {
+     display: none;
+     position: fixed;
+     margin-left: auto;
+     margin-right: auto;
+     left: 0;
+     right: 0;
+     z-index: 1; /* Sit on top */
+     margin-top: 10%; /* Location of the box */
+     background-color: #fefefe;
+     padding: 20px;
+     border: 1px solid #888;
+     width: 400px;
+ }
+
+ /* The Close Button */
+ .close {
+     color: #aaaaaa;
+     float: right;
+     font-size: 28px;
+     font-weight: bold;
+ }
+
+ .close:hover,
+ .close:focus {
+     color: #000;
+     text-decoration: none;
+     cursor: pointer;
+ }

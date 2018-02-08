@@ -2,20 +2,66 @@
 
 {% block content %}
 
+<script>
+
+console.log("test");
+
+player = ""
+row = undefined;
+function openModal(tag, name) {
+    console.log(name);
+    $(".modal").show()
+    player = $(tag).parent().find(".player-name").text()
+    row = $(tag).parent()
+    $("#modal-text").text("Are you sure you want to delete " + player + " ?")
+}
+
+function closeModal() {
+    $(".modal").hide()
+}
+
+function confirmDelete() {
+    console.log("Test");
+    $(".modal").hide()
+    row.remove()
+    $.ajax({
+        url: '/roster?name='+player,
+        type: 'DELETE',
+        success: function(data, textStatus) {
+            console.log("Delete successful!");
+        }
+    });
+}
+
+</script>
+
 <h1> Roster </h1>
 
+
+<!-- The Modal -->
+
+<!-- Modal content -->
+<div class="modal">
+    <span class="close" onClick= "closeModal()">&times;</span>
+    <p id = "modal-text">Some text in the Modal.</p>
+
+    <span class = "delete-button" onClick = "confirmDelete(this)"> Delete </span>
+</div>
+
+
 <form action="/roster" method="POST">
-  <input type="text" name="name" placeholder="Swimmer Name">
-  <input type="submit" value="Add Swimmer">
+    <input type="text" name="name" placeholder="Swimmer Name">
+    <input type="submit" value="Add Swimmer">
 </form>
 
-<ul>
+<div id = "roster-table">
+    {% for player in roster %}
+    <div class = "player-row">
+        <span class = "player-name">{{ player.name }}</span>
+        <span class = "delete-button" onClick = "openModal(this)"> Delete </span>
+    </div>
 
-{% for player in roster %}
-    <li> {{ player.name }} </li>
-{% endfor %}
-
-</ul>
-
+    {% endfor %}
+</div>
 
 {% endblock %}

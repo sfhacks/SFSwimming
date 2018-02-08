@@ -34,6 +34,13 @@ def getPlayer(name):
 def getPlayerById(id):
     return Player.objects.get(id=id)
 
+def deletePlayer(name):
+    p = Player.objects.get(name=name)
+    times = Time.objects(player=p)
+    for time in times:
+        time.delete()
+    p.delete()
+
 def getTopPlayers(stroke, distance):
     players = []
     times = []
