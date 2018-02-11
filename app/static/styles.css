@@ -34,13 +34,13 @@ body {
     margin-top: 10px;
 }
 
- td,  th {
+td,  th {
     padding: 8px;
 }
 
- tr:nth-child(even){background-color: #f2f2f2;}
+tr:nth-child(even){background-color: #f2f2f2;}
 
- tr:hover {background-color: #ddd;}
+tr:hover {background-color: #ddd;}
 
 th {
     padding-top: 12px;
@@ -83,60 +83,66 @@ th {
 .player-row:nth-child(odd){background-color: #f2f2f2;}
 
 .delete-button {
-    color: white;
-    background-color: #f44242;
+    color: #f44242;
     padding: 3px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
+    text-decoration: underline;
     cursor: pointer;
-    width: 50px;
+    float: right;
 }
 
 input[type=text],input[type='password']{
-  border: 1px solid grey;
-  border-radius: 5px;
-  /* background-color: lightgrey; */
-  outline: none;
-  height: 25px;
-  padding: 0px 5px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    /* background-color: lightgrey; */
+    outline: none;
+    height: 25px;
+    padding: 0px 5px;
 }
 
 
 /*
- *
- *  Modal
- *
- */
+*
+*  Modal
+*
+*/
 
 
- /* Modal Content */
- .modal {
-     display: none;
-     position: fixed;
-     margin-left: auto;
-     margin-right: auto;
-     left: 0;
-     right: 0;
-     z-index: 1; /* Sit on top */
-     margin-top: 10%; /* Location of the box */
-     background-color: #fefefe;
-     padding: 20px;
-     border: 1px solid #888;
-     width: 400px;
- }
+/* Modal Content */
 
- /* The Close Button */
- .close {
-     color: #aaaaaa;
-     float: right;
-     font-size: 28px;
-     font-weight: bold;
- }
 
- .close:hover,
- .close:focus {
-     color: #000;
-     text-decoration: none;
-     cursor: pointer;
- }
+.modal {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: none;
+    position: fixed;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin: 0% 30%;
+    left: 0;
+    right: 0;
+    z-index: 1; /* Sit on top */
+    margin-top: 0%; /* Location of the box */
+    background-color: #fefefe;
+    padding: 20px;
+    padding-top: 10px;
+    /* border: 1px solid #888; */
+    /* width: 400px; */
+}
+
+
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-family: "Avenir"
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

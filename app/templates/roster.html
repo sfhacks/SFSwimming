@@ -13,7 +13,7 @@ function openModal(tag, name) {
     $(".modal").show()
     player = $(tag).parent().find(".player-name").text()
     row = $(tag).parent()
-    $("#modal-text").text("Are you sure you want to delete " + player + " ?")
+    $("#modal-text").text("Are you sure you want to delete " + player + "?")
 }
 
 function closeModal() {
@@ -43,6 +43,7 @@ function confirmDelete() {
 <!-- Modal content -->
 <div class="modal">
     <span class="close" onClick= "closeModal()">&times;</span>
+    <h2>Delete Player</h2>
     <p id = "modal-text">Some text in the Modal.</p>
 
     <span class = "delete-button" onClick = "confirmDelete(this)"> Delete </span>

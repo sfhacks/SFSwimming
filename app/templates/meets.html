@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Add Meet </h1>
+
+<form action="/meet" method="POST">
+
+    <input type="text" name="time" placeholder="Meet Name">
+    <input type="submit" value="Add Meet">
+
+</form>
+
+
+{% endblock %}

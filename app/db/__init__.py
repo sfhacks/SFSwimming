@@ -14,6 +14,9 @@ else:
 
 #Schemas
 
+class Meet(Document):
+    name = StringField()
+
 class Player(Document):
     name = StringField(max_length=50)
 
@@ -22,6 +25,7 @@ class Time(Document):
     distance = IntField()
     time = FloatField()
     player = ReferenceField(Player)
+    meet = ReferenceField(Meet)
 
 # Roster
 def getRoster():

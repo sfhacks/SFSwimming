@@ -109,6 +109,11 @@ def add_time():
     addTime(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id)
     return redirect("/times")
 
+@app.route('/meets', methods=['GET'])
+@requires_auth
+def meets():
+    return render_template("meets.html")
+
 @app.route('/player', methods=['GET'])
 @requires_auth
 def player():
