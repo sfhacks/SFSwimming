@@ -31,6 +31,10 @@ class Time(Document):
 def getRoster():
     return Player.objects.order_by("name")
 
+# Meets
+def getMeets():
+    return Meet.objects.order_by("name")
+
 #Players
 
 def addPlayer(name):
