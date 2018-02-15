@@ -29,6 +29,18 @@ class Meet(Document):
 class Player(Document):
     name = StringField(max_length=50)
 
+    @staticmethod
+    def all():
+        return Player.objects.order_by("name")
+
+    @staticmethod
+    def remove(name):
+        p = Player.objects.get(name=name)
+        times = Time.objects(player=p)
+        for time in times:
+            time.delete()
+        p.delete()
+
 class Time(Document):
     stroke = StringField()
     distance = IntField()
@@ -36,9 +48,6 @@ class Time(Document):
     player = ReferenceField(Player)
     meet = ReferenceField(Meet)
 
-# Roster
-def getRoster():
-    return Player.objects.order_by("name")
 
 #Players
 
@@ -51,12 +60,6 @@ def getPlayer(name):
 def getPlayerById(id):
     return Player.objects.get(id=id)
 
-def deletePlayer(name):
-    p = Player.objects.get(name=name)
-    times = Time.objects(player=p)
-    for time in times:
-        time.delete()
-    p.delete()
 
 def getTopPlayers(stroke, distance):
     players = []

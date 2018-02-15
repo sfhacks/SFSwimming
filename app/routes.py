@@ -44,7 +44,7 @@ def index():
 @app.route('/roster', methods=['GET'])
 @requires_auth
 def roster():
-    return render_template('roster.html', roster = getRoster())
+    return render_template('roster.html', roster = Player.all())
 
 @app.route('/roster', methods=['POST'])
 def add_swimmer():
@@ -55,7 +55,7 @@ def add_swimmer():
 @app.route('/roster', methods=['DELETE'])
 def delete_swimmer():
     name = request.args["name"]
-    deletePlayer(name)
+    Player.remove(name)
 
     return "Success", 200
 
@@ -83,7 +83,7 @@ def logout():
 @requires_auth
 def list_all_times():
     # Database+template code for all times
-    roster = getRoster()
+    roster = Player.all()
     meets = Meet.all()
     template = render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100], meets = meets)
     return template
