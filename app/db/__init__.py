@@ -17,6 +17,15 @@ else:
 class Meet(Document):
     name = StringField()
 
+    @staticmethod
+    def all():
+        return Meet.objects.order_by("name")
+
+    @staticmethod
+    def add(name):
+        Meet(name = name).save()
+
+
 class Player(Document):
     name = StringField(max_length=50)
 
@@ -30,10 +39,6 @@ class Time(Document):
 # Roster
 def getRoster():
     return Player.objects.order_by("name")
-
-# Meets
-def getMeets():
-    return Meet.objects.order_by("name")
 
 #Players
 

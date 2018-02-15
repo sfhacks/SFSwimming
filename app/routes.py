@@ -84,7 +84,8 @@ def logout():
 def list_all_times():
     # Database+template code for all times
     roster = getRoster()
-    template = render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100])
+    meets = Meet.all()
+    template = render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100], meets = meets)
     return template
 
 @app.route('/event', methods=['GET'])
@@ -104,7 +105,6 @@ def show_event():
 @app.route('/times', methods=['POST'])
 @requires_auth
 def add_time():
-    print(request.form)
     player = getPlayer(request.form["name"])
     addTime(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id)
     return redirect("/times")
@@ -112,7 +112,14 @@ def add_time():
 @app.route('/meets', methods=['GET'])
 @requires_auth
 def meets():
-    return render_template("meets.html")
+    return render_template("meets.html", meets = Meet.all())
+
+@app.route('/meets', methods=['POST'])
+@requires_auth
+def add_meet():
+    name = request.form["name"]
+    Meet.add(name)
+    return redirect("/meets")
 
 @app.route('/player', methods=['GET'])
 @requires_auth

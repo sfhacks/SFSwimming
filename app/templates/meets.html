@@ -4,10 +4,20 @@
 
 <h1> Add Meet </h1>
 
-<form action="/meet" method="POST">
+<form action="/meets" method="POST">
 
-    <input type="text" name="time" placeholder="Meet Name">
+    <input type="text" name="name" placeholder="Meet Name">
     <input type="submit" value="Add Meet">
+
+    <div id = "roster-table">
+        {% for meet in meets %}
+        <div class = "player-row">
+            <span class = "player-name">{{ meet.name }}</span>
+            <!-- <span class = "delete-button" onClick = "openModal(this)"> Delete </span> -->
+        </div>
+
+        {% endfor %}
+    </div>
 
 </form>
 

@@ -10,13 +10,6 @@
             <option>{{player.name}}</option>
         {% endfor %}
     </select>
-    <select name="event">
-        <!--
-        {% for event in events %}
-            <option>{{event.name}}</option>
-        {% endfor %}
-        -->
-    </select>
     <select name="stroke">
         {% for stroke in strokes %}
             <option>{{stroke}}</option>
@@ -26,6 +19,12 @@
         {% for distance in distances %}
             <option>{{distance}}</option>
         {% endfor %}
+    </select>
+    <select name="meet">
+        {% for meet in meets %}
+            <option>{{meet.name}}</option>
+        {% endfor %}
+
     </select>
     <input type="text" name="time" placeholder="Time">
     <input type="submit" value="Add Time">
