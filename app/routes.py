@@ -97,7 +97,8 @@ def show_event():
         if event["stroke"] == stroke:
             data.append({
             "name": stroke + " " + str(event["distance"]),
-            "times": getTopPlayers(stroke, event["distance"])
+            "timesByPlayer": getTopPlayers(stroke, event["distance"]),
+            "totalTimes": getTopTimes(stroke, event["distance"])
             })
 
     return render_template('event.html', stroke=stroke, events=data)
