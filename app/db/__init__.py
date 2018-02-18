@@ -81,5 +81,8 @@ def addTime(stroke, distance, time, player_id):
 def getTopTimes(stroke, distance):
     return Time.objects(stroke=stroke, distance=distance).order_by("time")[:5]
 
+def getAllPlayerTimes(player_id):
+    return Time.objects(player=player_id)
+
 def getAllTimesForPlayer(stroke, distance, player_id):
         return Time.objects(stroke=stroke, distance=distance, player=player_id).order_by("-id")

@@ -58,7 +58,7 @@ function confirmDelete() {
 <div id = "roster-table">
     {% for player in roster %}
     <div class = "player-row">
-        <span class = "player-name">{{ player.name }}</span>
+        <span class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></span>
         <span class = "delete-button" onClick = "openModal(this)"> Delete </span>
     </div>
 

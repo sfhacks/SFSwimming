@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{swimmer.name}}</h1>
+<div id = "event-container" class="event-box">
+     <table>
+         <tr>
+             <th>Time (Most recent)</th>
+             <th>Event</th>
+             <th>Meet</th>
+         </tr>
+         {% for _, value in zip(range(1, 6), values) %} <!-- At most, the last 5 values -->
+         <tr >
+             <td>{{'%0.2f'| format(value.time)}} sec</td>
+             <td><a href= {{"/player?id="+swimmer.id|string+"&stroke="+value.stroke+"&distance="+value.distance|string}}>{{value.stroke value.distance|string}}</a></td>
+             <td>{{value.meet.name}}</td>
+         </tr>
+
+         {% endfor %}
+
+     </table>
+</div>
+
+{% endblock %}

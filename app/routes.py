@@ -122,7 +122,7 @@ def add_meet():
     Meet.add(name)
     return redirect("/meets")
 
-@app.route('/player', methods=['GET'])
+@app.route('/player', methods=['GET']) #Specific event for player
 @requires_auth
 def player():
 
@@ -136,6 +136,15 @@ def player():
     print (times)
 
     return render_template("playerProfile.html", swimmer = player, stroke = stroke + " " + distance, values = times)
+
+@app.route('/playerProfile', methods=['GET']) # All events for player
+@requires_auth
+def playerProfile():
+    id = request.args.get('id')
+    player = getPlayerById(id)
+    times = getAllPlayerTimes(id)
+    return render_template('fullProfile.html', swimmer=player, values=times)
+
 
 def validate_pwd(password):
     return hashlib.md5(password.encode()).hexdigest() == hashed_pwd
