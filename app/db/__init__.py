@@ -7,11 +7,7 @@ if not os.environ.get('DOCKER'):
     connect(host="localhost:27017")
 else:
     connect(host="db:27017")
-
-#Slower
-
-# connect(username="andrew", password="sfhacks18", host="mongodb://main-shard-00-00-w6sow.mongodb.net:27017,main-shard-00-01-w6sow.mongodb.net:27017,main-shard-00-02-w6sow.mongodb.net:27017/test?ssl=true&replicaSet=main-shard-0&authSource=admin")
-
+    
 #Schemas
 
 class Meet(Document):
