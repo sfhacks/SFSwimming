@@ -107,7 +107,8 @@ def show_event():
 @requires_auth
 def add_time():
     player = getPlayer(request.form["name"])
-    addTime(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id)
+    meet = Meet.objects.get(name = request.form["meet"])
+    addTime(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id, meet)
     return redirect("/times")
 
 @app.route('/meets', methods=['GET'])

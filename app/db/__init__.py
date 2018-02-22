@@ -75,8 +75,8 @@ def getTopPlayers(stroke, distance):
 
 # Times
 
-def addTime(stroke, distance, time, player_id):
-    Time(stroke=stroke, distance=distance, time=time, player=player_id).save()
+def addTime(stroke, distance, time, player_id, meet):
+    Time(stroke=stroke, distance=distance, time=time, player=player_id, meet=meet).save()
 
 def getTopTimes(stroke, distance):
     return Time.objects(stroke=stroke, distance=distance).order_by("time")[:5]
