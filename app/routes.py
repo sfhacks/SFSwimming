@@ -23,9 +23,18 @@ disable_login = True
 events = [
     {"stroke": "free", "distance": 50},
     {"stroke": "free", "distance": 100},
+    {"stroke": "free", "distance": 200},
+    {"stroke": "free", "distance": 500},
     {"stroke": "fly", "distance": 50},
-    {"stroke": "fly", "distance": 100}
+    {"stroke": "back", "distance": 50},
+    {"stroke": "back", "distance": 100},
+    {"stroke": "breast", "distance": 50},
+    {"stroke": "breast", "distance": 100},
+    {"stroke": "medley", "distance": 100}
 ]
+
+event_names = list(set([event['stroke'] for event in events]))
+event_distances = list(set([event['distance'] for event in events]))
 
 # use this decorator on routes that are protected
 def requires_auth(f):
@@ -85,7 +94,7 @@ def list_all_times():
     # Database+template code for all times
     roster = Player.all()
     meets = Meet.all()
-    template = render_template('times.html', roster = roster, strokes = ["free", "fly"], distances = [50, 100], meets = meets)
+    template = render_template('times.html', roster = roster, strokes = event_names, distances = event_distances, meets = meets)
     return template
 
 @app.route('/event', methods=['GET'])
