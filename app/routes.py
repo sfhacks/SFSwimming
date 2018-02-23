@@ -1,22 +1,9 @@
 import sys
 from functools import wraps
-from flask import flash, redirect, render_template, request, session, abort
+from flask import *
 from app import app
 from app.db import *
 import hashlib
-import time
-
-# used for profiling
-class Timer():
-    time = 0
-    @staticmethod
-    def start():
-        Timer.time = time.time()
-
-    @staticmethod
-    def end():
-        print(time.time()-Timer.time)
-
 
 hashed_pwd = '763e6715ab44cd899ae1b172cc78d5a7'
 disable_login = True
@@ -50,6 +37,8 @@ def requires_auth(f):
 def index():
     return redirect('/times')
 
+# Roster
+
 @app.route('/roster', methods=['GET'])
 @requires_auth
 def roster():
@@ -57,9 +46,9 @@ def roster():
 
 @app.route('/roster', methods=['POST'])
 def add_swimmer():
-    addPlayer(name = request.form['name'])
-    return redirect("/roster")
+    Player(name = request.form['name']).save()
 
+    return redirect("/roster")
 
 @app.route('/roster', methods=['DELETE'])
 def delete_swimmer():
@@ -67,6 +56,8 @@ def delete_swimmer():
     Player.remove(name)
 
     return "Success", 200
+
+# Login/Logout
 
 @app.route('/login', methods=['GET'])
 def login():
@@ -86,7 +77,14 @@ def auth():
 @app.route('/logout')
 def logout():
     session['logged_in'] = False
+
     return redirect("/login")
+
+
+def validate_pwd(password):
+    return hashlib.md5(password.encode()).hexdigest() == hashed_pwd
+
+# Times
 
 @app.route('/times', methods=['GET'])
 @requires_auth
@@ -97,6 +95,18 @@ def list_all_times():
     template = render_template('times.html', roster = roster, strokes = event_names, distances = event_distances, meets = meets)
     return template
 
+@app.route('/times', methods=['POST'])
+@requires_auth
+def add_time():
+    player = Player.objects.get(name = request.form["name"])
+    meet = Meet.objects.get(name = request.form["meet"])
+
+    Time(stroke = request.form["stroke"], distance = int(request.form["distance"]), time = (request.form["time"]), player = player.id, meet = meet).save()
+
+    return redirect("/times")
+
+# Event
+
 @app.route('/event', methods=['GET'])
 @requires_auth
 def show_event():
@@ -106,19 +116,13 @@ def show_event():
         if event["stroke"] == stroke:
             data.append({
             "name": stroke + " " + str(event["distance"]),
-            "timesByPlayer": getTopPlayers(stroke, event["distance"]),
-            "totalTimes": getTopTimes(stroke, event["distance"])
+            "timesByPlayer": Player.top_players(stroke, event["distance"]),
+            "totalTimes": Time.top_times(stroke, event["distance"])
             })
 
     return render_template('event.html', stroke=stroke, events=data)
 
-@app.route('/times', methods=['POST'])
-@requires_auth
-def add_time():
-    player = getPlayer(request.form["name"])
-    meet = Meet.objects.get(name = request.form["meet"])
-    addTime(request.form["stroke"], int(request.form["distance"]), float(request.form["time"]), player.id, meet)
-    return redirect("/times")
+# Meets
 
 @app.route('/meets', methods=['GET'])
 @requires_auth
@@ -128,33 +132,25 @@ def meets():
 @app.route('/meets', methods=['POST'])
 @requires_auth
 def add_meet():
-    name = request.form["name"]
-    Meet.add(name)
+    Meet(name = request.form["name"]).save()
     return redirect("/meets")
+
+# Player
 
 @app.route('/player', methods=['GET']) #Specific event for player
 @requires_auth
 def player():
-
-    id = request.args.get('id')
-    player = getPlayerById(id)
+    player = Player.objects.get(id=request.args.get('id'))
     stroke = request.args.get('stroke')
     distance = request.args.get('distance')
-    times = getAllTimesForPlayer(stroke,float(distance),id)
-
-    print(player.name)
-    print (times)
+    times = player.times(stroke = stroke, distance = float(distance))
 
     return render_template("playerProfile.html", swimmer = player, stroke = stroke + " " + distance, values = times)
 
 @app.route('/playerProfile', methods=['GET']) # All events for player
 @requires_auth
 def playerProfile():
-    id = request.args.get('id')
-    player = getPlayerById(id)
-    times = getAllPlayerTimes(id)
+    player = Player.objects.get(id=request.args.get('id'))
+    times = player.times()
+
     return render_template('fullProfile.html', swimmer=player, values=times)
-
-
-def validate_pwd(password):
-    return hashlib.md5(password.encode()).hexdigest() == hashed_pwd

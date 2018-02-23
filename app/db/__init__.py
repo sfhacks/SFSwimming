@@ -7,7 +7,7 @@ if not os.environ.get('DOCKER'):
     connect(host="localhost:27017")
 else:
     connect(host="db:27017")
-    
+
 #Schemas
 
 class Meet(Document):
@@ -37,6 +37,26 @@ class Player(Document):
             time.delete()
         p.delete()
 
+    @staticmethod
+    def top_players(stroke, distance):
+        players = []
+        times = []
+
+        for _ in range(5):
+            query = Time.objects(stroke=stroke, distance=distance, player__nin=players).limit(1).order_by("time")
+            if len(query) > 0:
+                time = query[0]
+                times.append(time)
+                players.append(time.player)
+        return times
+
+    def times(self, stroke = None, distance = None):
+        if stroke:
+            return Time.objects(stroke=stroke, distance=distance, player=self).order_by("-id")
+        else:
+            return Time.objects(player=self).order_by("-id")
+
+
 class Time(Document):
     stroke = StringField()
     distance = IntField()
@@ -44,41 +64,6 @@ class Time(Document):
     player = ReferenceField(Player)
     meet = ReferenceField(Meet)
 
-
-#Players
-
-def addPlayer(name):
-    Player(name=name).save()
-
-def getPlayer(name):
-    return Player.objects(name = name)[0]
-
-def getPlayerById(id):
-    return Player.objects.get(id=id)
-
-
-def getTopPlayers(stroke, distance):
-    players = []
-    times = []
-
-    for _ in range(5):
-        query = Time.objects(stroke=stroke, distance=distance, player__nin=players).limit(1).order_by("time")
-        if len(query) > 0:
-            time = query[0]
-            times.append(time)
-            players.append(time.player)
-    return times
-
-# Times
-
-def addTime(stroke, distance, time, player_id, meet):
-    Time(stroke=stroke, distance=distance, time=time, player=player_id, meet=meet).save()
-
-def getTopTimes(stroke, distance):
-    return Time.objects(stroke=stroke, distance=distance).order_by("time")[:5]
-
-def getAllPlayerTimes(player_id):
-    return Time.objects(player=player_id)
-
-def getAllTimesForPlayer(stroke, distance, player_id):
-        return Time.objects(stroke=stroke, distance=distance, player=player_id).order_by("-id")
+    @staticmethod
+    def top_times(stroke, distance):
+        return Time.objects(stroke=stroke, distance=distance).order_by("time")[:5]
