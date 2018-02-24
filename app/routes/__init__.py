@@ -1,3 +1,4 @@
+from flask import redirect
 from app import app
 from app.routes.roster import roster
 from app.routes.auth import auth
@@ -18,4 +19,4 @@ app.register_blueprint(times)
 @app.route('/')
 @requires_auth
 def index():
-    return redirect('/times')
+    return redirect('/login')
