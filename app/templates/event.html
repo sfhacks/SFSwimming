@@ -10,22 +10,22 @@
      <a href="/event?stroke=medley" class="header-link">Medley</a>
 </div>
 
-<center><h1> {{stroke | capitalize}} </h1></center>
+<h1> {{stroke | capitalize}} </h1>
 
 
 {% for event in events %}
 <hr>
-<h2><u>{{event.name | capitalize}}</u></h2>
+<center><h2>{{event.name | capitalize}}</h2></center>
 <div id="event-container">
     <style type="text/css" media="screen">
-        table { border: 1px solid black;float:left;width:300px;}
+        table { border: 1px solid black;float:left;width:500px;}
         #swimtable {
-            width: 300px;
+            width: 500px;
             margin: 0 auto;
         }
     </style>
    <div class = "event-box" id = "swimtable">
-       <h3>Top Swimmers</h3>
+       <center><h3>Top Swimmers</h3></center>
        <table>
            <tr>
                <th>Name</th>
@@ -43,7 +43,7 @@
        </table>
    </div>
    <div class = "event-box" id = "swimtable">
-        <h3>Top Times</h3>
+        <center><h3>Top Times</h3></center>
         <table>
              <tr>
                   <th>Name</th>
