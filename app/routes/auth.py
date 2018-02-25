@@ -22,7 +22,7 @@ def main():
         session['logged_in'] = True
         return redirect("/roster")
     else:
-        flash('Incorrect password')
+        return redirect("/login")
 
 
 @auth.route('/logout')
