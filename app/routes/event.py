@@ -13,9 +13,9 @@ def show_event():
     for event in events:
         if event["stroke"] == stroke:
             data.append({
-            "name": stroke + " " + str(event["distance"]),
-            "timesByPlayer": Player.top_players(stroke, event["distance"]),
-            "totalTimes": Time.top_times(stroke, event["distance"])
+                "name": stroke + " " + str(event["distance"]),
+                "timesByPlayer": Player.top_players(stroke, event["distance"]),
+                "totalTimes": Time.top_times(stroke, event["distance"])
             })
 
     return render_template('event.html', stroke=stroke, events=data)

@@ -1,7 +1,11 @@
 from functools import wraps
 from flask import *
+import os
+
 disable_login = True
 
+if os.environ.get('DOCKER'):
+    disable_login = False
 
 def requires_auth(f):
     @wraps(f)

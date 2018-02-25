@@ -10,12 +10,14 @@ def main():
     return render_template('roster.html', roster = Player.all())
 
 @roster.route('/roster', methods=['POST'])
+@requires_auth
 def add_swimmer():
     Player(name = request.form['name']).save()
 
     return redirect("/roster")
 
 @roster.route('/roster', methods=['DELETE'])
+@requires_auth
 def delete_swimmer():
     name = request.args["name"]
     Player.remove(name)
