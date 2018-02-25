@@ -10,50 +10,56 @@
      <a href="/event?stroke=medley" class="header-link">Medley</a>
 </div>
 
-<h1> {{stroke | capitalize}} </h1>
+<center><h1> {{stroke | capitalize}} </h1></center>
 
-<div id = "event-container">
-    {% for event in events %}
-        <div class = "event-box">
-            <h3>{{event.name | capitalize}} - Top Players</h3>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Time</th>
-                    <th>Meet</th>
-                </tr>
 
-                {% for time in event.timesByPlayer %}
-                <tr>
-                    <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-                    <td>{{'%0.2f'| format(time.time)}}</td>
-                    <td>{{time.meet.name}}</td>
-               </tr>
-                {% endfor %}
+{% for event in events %}
+<hr>
+<h2><u>{{event.name | capitalize}}</u></h2>
+<div id="event-container">
 
-            </table>
-        </div>
-        <div class = "event-box">
-             <h3>{{event.name | capitalize}} - Top Times</h3>
-             <table>
-                  <tr>
-                       <th>Name</th>
-                       <th>Time</th>
-                       <th>Meet</th>
-                  </tr>
+   <div class = "event-box">
+       <h3>Top Players</h3>
+       <center>
+       <table>
+           <tr>
+               <th>Name</th>
+               <th>Time</th>
+               <th>Meet</th>
+           </tr>
 
-                  {% for time in event.totalTimes %}
-                  <tr>
-                       <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-                       <td>{{'%0.2f'| format(time.time)}}</td>
-                       <td>{{time.meet.name}}</td>
-                  </tr>
-                  {% endfor %}
-             </table>
-        </div>
+           {% for time in event.timesByPlayer %}
+           <tr>
+               <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
+               <td>{{'%0.2f'| format(time.time)}}</td>
+               <td>{{time.meet.name}}</td>
+          </tr>
+           {% endfor %}
+       </table>
+ </center>
+   </div>
+   <div class = "event-box">
+        <h3>Top Times</h3>
+        <center>
+             <tr>
+                  <th>Name</th>
+                  <th>Time</th>
+                  <th>Meet</th>
+             </tr>
 
-    {% endfor %}
+             {% for time in event.totalTimes %}
+             <tr>
+                  <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
+                  <td>{{'%0.2f'| format(time.time)}}</td>
+                  <td>{{time.meet.name}}</td>
+             </tr>
+
+             {% endfor %}
+        </table>
+   </div>
 </div>
+{% endfor %}
+
 
 
 
