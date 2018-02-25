@@ -17,8 +17,14 @@
 <hr>
 <h2><u>{{event.name | capitalize}}</u></h2>
 <div id="event-container">
-
-   <div class = "event-box">
+    <style type="text/css" media="screen">
+        table { border: 1px solid black;float:left;width:300px;}
+        #swimtable {
+            width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+   <div class = "event-box" id = "swimtable">
        <h3>Top Swimmers</h3>
        <table>
            <tr>
@@ -36,7 +42,7 @@
            {% endfor %}
        </table>
    </div>
-   <div class = "event-box">
+   <div class = "event-box" id = "swimtable">
         <h3>Top Times</h3>
         <table>
              <tr>
