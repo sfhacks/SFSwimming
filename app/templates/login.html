@@ -5,13 +5,46 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-<div id = "login-box">
-    <form action="/login" method="POST">
-      <input type="text" name="username" placeholder="Username">
-      <input type="password" name="password" placeholder="Password">
-      <input type="submit" value="Log in">
-    </form>
-</div>
+<head>
+<style>
+  img {
+    position: absolute;
+    top: 30%;
+    left: 41.2%;
+    margin-left: -(100)px;
+    margin-top: -(70/2)px;
+  }
+  form {
+    position: absolute;
+    top: 43%;
+    left: 45%;
+  }
+  input {
+    display: block;
+    margin-top: 10px;
+  }
+  .b {
+    background-color: #8c4c02;
+    color: white;
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    width: 152px;
+}
+</style>
+</head>
+
+<body>
+  <img src="{{url_for('static', filename='assets/sf-logo.png')}}" alt="Saint Francis Athletics">
+
+  <div id = "login-box">
+      <form action="/login" method="POST" id="login-form">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" class="b" value="Log in">
+      </form>
+  </div>
+</body>
 
 {% endif %}
 
