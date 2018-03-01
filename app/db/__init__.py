@@ -76,3 +76,7 @@ class Time(Document):
                 times.append(time)
 
         return times[:5]
+
+    @staticmethod
+    def all_times():
+        return Time.objects.order_by("name")

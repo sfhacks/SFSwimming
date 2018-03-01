@@ -3,7 +3,7 @@ from app.db import *
 from app.routes.requires_auth import *
 
 genders = ['M', 'F']
-teams = ['Junior Varsity', 'Varsity']
+teams = ['Junior Varsity', 'Varsity', 'Gold']
 
 roster = Blueprint('roster', __name__, template_folder='templates')
 

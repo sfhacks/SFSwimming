@@ -12,10 +12,10 @@ times = Blueprint('times', __name__, template_folder='templates')
 @times.route('/times', methods=['GET'])
 @requires_auth
 def list_all_times():
-    # Database+template code for all times
+    times = Time.all_times()
     roster = Player.all()
     meets = Meet.all()
-    template = render_template('times.html', roster = roster, strokes = event_names, distances = event_distances, meets = meets)
+    template = render_template('times.html', roster = roster, strokes = event_names, distances = event_distances, meets = meets, times = times)
     return template
 
 @times.route('/times', methods=['POST'])

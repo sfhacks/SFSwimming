@@ -22,13 +22,19 @@ def show_event():
     elif gender_team == "girlsvarsity":
         gender = "F"
         team = "Varsity"
+    elif gender_team == "boysgold":
+        gender = "M"
+        team = "Gold"
+    elif gender_team == "girlsgold":
+        gender = "F"
+        team = "Gold"
 
     stroke = request.args.get('stroke')
     data = []
     for event in events:
         if event["stroke"] == stroke:
             data.append({
-                "name": stroke + " " + str(event["distance"]),
+                "name": str(event["distance"]) + " " + stroke[0].upper() + stroke[1:],
                 "timesByPlayer": Player.top_players(stroke, event["distance"], gender, team),
                 "totalTimes": Time.top_times(stroke, event["distance"], gender, team)
             })

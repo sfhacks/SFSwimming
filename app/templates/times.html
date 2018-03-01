@@ -30,4 +30,28 @@
 
 </form>
 
+<br></br>
+<br></br>
+<h3>Recent Entries</h3>
+
+<div id = "time-table">
+
+    <table>
+         <tr>
+              <th>Name</th>
+              <th>Time</th>
+              <th>Meet</th>
+         </tr>
+
+         {% for t in times %}
+         <tr>
+              <td><a href = {{"/player?id="+t.player.id|string+"&stroke="+t.stroke+"&distance="+t.distance|string}}>{{t.player.name}}</a></td>
+              <td>{{'%0.2f'| format(t.time)}}</td>
+              <td>{{t.meet.name}}</td>
+         </tr>
+
+         {% endfor %}
+    </table>
+</div>
+
 {% endblock %}
