@@ -52,6 +52,16 @@ function confirmDelete() {
 
 <form action="/roster" method="POST">
     <input type="text" name="name" placeholder="Swimmer Name">
+    <select name="gender">
+        {% for gender in genders %}
+            <option>{{gender}}</option>
+        {% endfor %}
+    </select>
+    <select name="team">
+        {% for team in teams %}
+            <option>{{team}}</option>
+        {% endfor %}
+    </select>
     <input type="submit" value="Add Swimmer">
 </form>
 

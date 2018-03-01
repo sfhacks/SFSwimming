@@ -24,6 +24,8 @@ class Meet(Document):
 
 class Player(Document):
     name = StringField(max_length=50)
+    gender = StringField(max_length=50)
+    team = StringField(max_length=50)
 
     @staticmethod
     def all():
@@ -38,17 +40,17 @@ class Player(Document):
         p.delete()
 
     @staticmethod
-    def top_players(stroke, distance):
+    def top_players(stroke, distance, gender, team):
         players = []
         times = []
+        query = Time.objects(stroke=stroke, distance=distance, player__nin=players).order_by("time")
 
-        for _ in range(5):
-            query = Time.objects(stroke=stroke, distance=distance, player__nin=players).limit(1).order_by("time")
-            if len(query) > 0:
-                time = query[0]
+        for time in query:
+            if str(time.player.name) not in players and str(time.player.gender) == gender and str(time.player.team) == team:
                 times.append(time)
-                players.append(time.player)
-        return times
+                players.append(time.player.name)
+
+        return times[:5]
 
     def times(self, stroke = None, distance = None):
         if stroke:
@@ -65,5 +67,12 @@ class Time(Document):
     meet = ReferenceField(Meet)
 
     @staticmethod
-    def top_times(stroke, distance):
-        return Time.objects(stroke=stroke, distance=distance).order_by("time")[:5]
+    def top_times(stroke, distance, gender, team):
+        times = []
+        query = Time.objects(stroke=stroke, distance=distance).order_by("time")
+
+        for time in query:
+            if str(time.player.gender) == gender and str(time.player.team) == team:
+                times.append(time)
+
+        return times[:5]

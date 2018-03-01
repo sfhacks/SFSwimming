@@ -8,8 +8,6 @@ auth = Blueprint('auth', __name__, template_folder='templates')
 
 hashed_pwd = '763e6715ab44cd899ae1b172cc78d5a7'
 
-
-
 @auth.route('/login', methods=['GET'])
 def login():
     return render_template('login.html', hideLogout = True)
