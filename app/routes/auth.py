@@ -20,10 +20,14 @@ def main():
         abort(400)
     if validate_pwd(request.form['password']) and request.form['username'] == 'admin':
         session['logged_in'] = True
-        return redirect("/roster")
+        return render_template("select_team.html")
     else:
         return redirect("/login")
 
+@auth.route('/selectTeam', methods=['GET'])
+def select():
+    session['team'] = str(request.args.get('team'))
+    return redirect("/roster")
 
 @auth.route('/logout')
 def logout():
