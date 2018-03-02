@@ -36,7 +36,7 @@
            {% for time in event.timesByPlayer %}
            <tr>
                <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-               <td>{{'%0.2f'| format(time.time)}}</td>
+               <td>{{time.str_time}}</td>
                <td>{{time.meet.name}}</td>
           </tr>
            {% endfor %}
@@ -54,7 +54,7 @@
              {% for time in event.totalTimes %}
              <tr>
                   <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-                  <td>{{'%0.2f'| format(time.time)}}</td>
+                  <td>{{time.str_time}}</td>
                   <td>{{time.meet.name}}</td>
              </tr>
 

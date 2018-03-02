@@ -13,7 +13,7 @@ def main():
     distance = request.args.get('distance')
     times = player.times(stroke = stroke, distance = float(distance))
 
-    return render_template("player_event_profile.html", swimmer = player, stroke = stroke + " " + distance, values = times)
+    return render_template("player_event_profile.html", swimmer = player, stroke = distance + " " + stroke, values = times)
 
 @player.route('/playerProfile', methods=['GET']) # All events for player
 @requires_auth

@@ -76,6 +76,7 @@ class Time(Document):
     time = FloatField()
     player = ReferenceField(Player)
     meet = ReferenceField(Meet)
+    str_time = StringField()
 
     @staticmethod
     def top_times(stroke, distance, gender, team):
@@ -91,3 +92,18 @@ class Time(Document):
     @staticmethod
     def all_times():
         return Time.objects.order_by("name")
+
+    @staticmethod
+    def parse_time(str_time):
+        # 04:10.21 -> 4 minutes, 10 seconds, 21 ms
+        minute = int(str_time.split(":")[0])
+        second = float(str_time.split(":")[1])
+        total_time_seconds = minute * 60 + second
+
+        return total_time_seconds
+
+    @staticmethod
+    def reverse_time(flt_time):
+        minute = int(flt_time // 60)
+        second = round(flt_time - (60 * minute), 2)
+        return (str(minute) + ":" + str(second))

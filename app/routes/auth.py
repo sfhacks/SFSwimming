@@ -28,6 +28,7 @@ def select():
     return redirect("/roster")
 
 @auth.route('/changeTeam', methods=['GET'])
+@requires_auth
 def change():
     if session['logged_in']:
         return render_template("select_team.html")

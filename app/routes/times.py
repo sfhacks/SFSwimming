@@ -23,7 +23,9 @@ def list_all_times():
 def add_time():
     player = Player.objects.get(name = request.form["name"])
     meet = Meet.objects.get(name = request.form["meet"])
+    time_seconds = Time.parse_time(request.form["time"])
+    str_time = Time.reverse_time(time_seconds)
 
-    Time(stroke = request.form["stroke"], distance = int(request.form["distance"]), time = (request.form["time"]), player = player.id, meet = meet).save()
+    Time(stroke = request.form["stroke"], distance = int(request.form["distance"]), time = time_seconds, player = player.id, meet = meet, str_time = str_time).save()
 
     return redirect("/times")

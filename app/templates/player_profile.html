@@ -5,14 +5,14 @@
 <div id = "event-container" class="event-box">
      <table>
          <tr>
-             <th>Time (Most recent)</th>
              <th>Event</th>
+             <th>Time (Most recent)</th>
              <th>Meet</th>
          </tr>
          {% for value in values %} <!-- At most, the last 5 values -->
          <tr >
-             <td>{{'%0.2f'| format(value.time)}} sec</td>
-             <td><a href= {{"/player?id="+swimmer.id|string+"&stroke="+value.stroke+"&distance="+value.distance|string}}>{{value.stroke + " " + value.distance|string}}</a></td>
+              <td><a href= {{"/player?id="+swimmer.id|string+"&stroke="+value.stroke+"&distance="+value.distance|string}}>{{value.distance|string + " " + value.stroke}}</a></td>
+             <td>{{value.str_time}}</td>
              <td>{{value.meet.name}}</td>
          </tr>
 
