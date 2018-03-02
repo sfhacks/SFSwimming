@@ -27,6 +27,13 @@ def select():
     session['team'] = str(request.args.get('team'))
     return redirect("/roster")
 
+@auth.route('/changeTeam', methods=['GET'])
+def change():
+    if session['logged_in']:
+        return render_template("select_team.html")
+    else:
+        return redirect("/login")
+
 @auth.route('/logout')
 def logout():
     session['logged_in'] = False

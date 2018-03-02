@@ -52,6 +52,17 @@ class Player(Document):
 
         return times[:5]
 
+    @staticmethod
+    def filter_by_team(gender, team):
+        players = []
+        query = Player.objects.order_by("name")
+
+        for player in query:
+            if str(player.gender) == gender and str(player.team) == team:
+                players.append(player)
+
+        return players
+
     def times(self, stroke = None, distance = None):
         if stroke:
             return Time.objects(stroke=stroke, distance=distance, player=self).order_by("-id")

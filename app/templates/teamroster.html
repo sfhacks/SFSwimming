@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> {{ teamname }} </h1>
+
+<div id = "roster-table">
+    {% for player in roster %}
+    <div class = "player-row">
+        <span class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></span>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

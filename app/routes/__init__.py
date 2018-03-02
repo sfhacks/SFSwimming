@@ -6,6 +6,7 @@ from app.routes.event import event
 from app.routes.meet import meet
 from app.routes.player import player
 from app.routes.times import times
+from app.routes.teamroster import teamroster
 from app.routes.requires_auth import requires_auth
 
 
@@ -15,6 +16,7 @@ app.register_blueprint(event)
 app.register_blueprint(meet)
 app.register_blueprint(player)
 app.register_blueprint(times)
+app.register_blueprint(teamroster)
 
 @app.route('/')
 @requires_auth
