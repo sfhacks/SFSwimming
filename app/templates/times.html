@@ -41,6 +41,7 @@
               <th>Name</th>
               <th>Time</th>
               <th>Meet</th>
+              <th>Stroke</th>
          </tr>
 
          {% for t in times %}
@@ -48,6 +49,7 @@
               <td><a href = {{"/player?id="+t.player.id|string+"&stroke="+t.stroke+"&distance="+t.distance|string}}>{{t.player.name}}</a></td>
               <td>{{'%0.2f'| format(t.time)}}</td>
               <td>{{t.meet.name}}</td>
+              <td>{{t.stroke}} {{t.distance|string}}</td>
          </tr>
 
          {% endfor %}
