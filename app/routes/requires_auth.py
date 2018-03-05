@@ -2,7 +2,7 @@ from functools import wraps
 from flask import *
 import os
 
-disable_login = True
+disable_login = False
 
 if os.environ.get('DOCKER'):
     disable_login = False

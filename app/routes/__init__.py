@@ -1,4 +1,4 @@
-from flask import redirect
+from flask import redirect, session
 from app import app
 from app.routes.roster import roster
 from app.routes.auth import auth
@@ -22,3 +22,11 @@ app.register_blueprint(teamroster)
 @requires_auth
 def index():
     return redirect('/login')
+
+@app.context_processor
+def inject_team():
+	if "team" in session:
+		return dict(team=session["team"])
+	else:
+		return dict()
+    
