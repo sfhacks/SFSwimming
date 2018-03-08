@@ -2,7 +2,7 @@ from functools import wraps
 from flask import *
 import os
 
-disable_login = False
+disable_login = True
 
 if os.environ.get('DOCKER'):
     disable_login = False
@@ -12,5 +12,7 @@ def requires_auth(f):
     def decorated(*args, **kwargs):
         if not session.get('logged_in') and not disable_login:
             return redirect("/login")
+        if disable_login and "team" not in session:
+        	session["team"] = "boysvarsity"
         return f(*args, **kwargs)
     return decorated

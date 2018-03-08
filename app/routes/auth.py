@@ -30,10 +30,7 @@ def select():
 @auth.route('/changeTeam', methods=['GET'])
 @requires_auth
 def change():
-    if session['logged_in']:
-        return render_template("select_team.html")
-    else:
-        return redirect("/login")
+    return render_template("select_team.html")
 
 @auth.route('/logout')
 def logout():
