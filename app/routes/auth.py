@@ -22,16 +22,6 @@ def main():
     else:
         return redirect("/login")
 
-@auth.route('/selectTeam', methods=['GET'])
-def select():
-    session['team'] = str(request.args.get('team'))
-    return redirect("/roster")
-
-@auth.route('/changeTeam', methods=['GET'])
-@requires_auth
-def change():
-    return render_template("select_team.html")
-
 @auth.route('/logout')
 def logout():
     session['logged_in'] = False

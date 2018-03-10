@@ -13,6 +13,7 @@ def requires_auth(f):
         if not session.get('logged_in') and not disable_login:
             return redirect("/login")
         if disable_login and "team" not in session:
-        	session["team"] = "boysvarsity"
+        	session["team"] = "Varisty"
+        	session["gender"] = "M"
         return f(*args, **kwargs)
     return decorated

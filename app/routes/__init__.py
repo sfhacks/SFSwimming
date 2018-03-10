@@ -28,8 +28,9 @@ def index():
 
 @app.context_processor
 def inject_team():
+	print(session)
 	if "team" in session:
-		return dict(team=session["team"])
+		return dict(team=("Boys" if session["gender"] == "M" else "Girls") + " " + session["team"])
 	else:
 		return dict()
     

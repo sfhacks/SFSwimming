@@ -7,32 +7,13 @@ teamroster = Blueprint('teamroster', __name__, template_folder='templates')
 @teamroster.route('/teamroster', methods=['GET'])
 @requires_auth
 def main():
-    gender_team = session['team']
+    gender = session["gender"]
+    team = session["team"]
 
-    if gender_team == "boysjv":
-        gender = "M"
-        team = "Junior Varsity"
-    elif gender_team == "boysvarsity":
-        gender = "M"
-        team = "Varsity"
-    elif gender_team == "girlsjv":
-        gender = "F"
-        team = "Junior Varsity"
-    elif gender_team == "girlsvarsity":
-        gender = "F"
-        team = "Varsity"
-    elif gender_team == "boysgold":
-        gender = "M"
-        team = "Gold"
-    elif gender_team == "girlsgold":
-        gender = "F"
-        team = "Gold"
+    print(session)
 
-    if gender == "F":
-        full_gender = "Girls"
-    elif gender == "M":
-        full_gender = "Boys"
+    teamname = ("Boys" if session["gender"] == "M" else "Girls") + " " + team
 
-    teamname = full_gender + " " + team
+    print(teamname)
 
     return render_template('teamroster.html', roster = Player.filter_by_team(gender, team), teamname = teamname)

@@ -47,6 +47,7 @@ class Player(Document):
         for _ in range(5):
             time = Time.objects(stroke=stroke, distance=distance, player__nin=players, 
                 player__in=Player.objects(gender=gender, team=team)).order_by("time").limit(1)
+
             if len(time) == 0:
                 break
 
@@ -57,6 +58,7 @@ class Player(Document):
 
     @staticmethod
     def filter_by_team(gender, team):
+        print(gender, team)
         return Player.objects(gender = gender, team = team).order_by("name")
 
     def times(self, stroke = None, distance = None):
