@@ -45,7 +45,7 @@ class Player(Document):
         times = []
 
         for _ in range(5):
-            time = Time.objects(stroke=stroke, distance=distance, player__nin=players, 
+            time = Time.objects(stroke=stroke, distance=distance, player__nin=players,
                 player__in=Player.objects(gender=gender, team=team)).order_by("time").limit(1)
 
             if len(time) == 0:
@@ -80,13 +80,13 @@ class Time(Document):
     def top_times(stroke, distance, gender, team):
         players = Player.objects(gender=gender, team=team)
         return Time.objects(
-            stroke=stroke, 
-            distance=distance, 
+            stroke=stroke,
+            distance=distance,
             player__in=players).order_by("time")[:5]
 
     @staticmethod
     def all_times():
-        return Time.objects.order_by("name")[:5]
+        return Time.objects.order_by("-id")[:5]
 
     @staticmethod
     def parse_time(str_time):

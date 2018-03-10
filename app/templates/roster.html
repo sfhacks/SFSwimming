@@ -49,30 +49,53 @@ function confirmDelete() {
     <span class = "delete-button" onClick = "confirmDelete(this)"> Delete </span>
 </div>
 
+<div class="card ">
+    <div class="card-content">
+        <form action="/roster" method="POST">
+            <div class = "row">
+                <div class="input-field col s3">
+                    <input type="text" name="name" placeholder="Swimmer Name">
+                </div>
+                <div class="input-field col s3">
+                    <select name="gender">
+                        {% for gender in genders %}
+                        <option>{{gender}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="input-field col s3">
+                    <select name="team">
+                        {% for team in teams %}
+                        <option>{{team}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
 
-<form action="/roster" method="POST">
-    <input type="text" name="name" placeholder="Swimmer Name">
-    <select name="gender">
-        {% for gender in genders %}
-            <option>{{gender}}</option>
-        {% endfor %}
-    </select>
-    <select name="team">
-        {% for team in teams %}
-            <option>{{team}}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Add Swimmer">
-</form>
-
-<div id = "roster-table">
-    {% for player in roster %}
-    <div class = "player-row">
-        <span class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></span>
-        <span class = "delete-button" onClick = "openModal(this)"> Delete </span>
+            <input class="waves-effect waves-light btn" type="submit" value="Add Swimmer">
+        </form>
     </div>
+</div>
 
-    {% endfor %}
+<div class="card ">
+    <div class="card-content">
+        <table class = "bordered">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th></th>
+            </tr>
+            {% for player in roster %}
+
+            <tr>
+                <td class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></td>
+                <!-- <td class = "waves-effect waves-light btn red lighten-2" onClick = "openModal(this)"> Delete </td> -->
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
 </div>
 
 {% endblock %}

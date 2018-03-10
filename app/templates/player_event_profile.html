@@ -9,7 +9,14 @@
 
 
     <script src='static/Chart.min.js'></script>
-    <canvas id="chart" width="600" height="400"></canvas>
+
+    <div class="card ">
+        <div class="card-content">
+
+            <canvas id="chart" width="600" height="400"></canvas>
+
+        </div>
+    </div>
 
     <script>
 
@@ -51,23 +58,28 @@
         });
 
 
-    </script>
+        </script>
 
-    <table>
-        <tr >
-            <th>Time (Most recent)</th>
-            <th>Meet</th>
-        </tr>
-        {% for value in values%}
-        <tr >
-            <td>{{value.str_time}}</td>
-            <td>{{value.meet.name}}</td>
-        </tr>
+        <div class="card ">
+            <div class="card-content">
+                <table class = "bordered">
+                    <tr >
+                        <th>Time (Most recent)</th>
+                        <th>Meet</th>
+                    </tr>
+                    {% for value in values%}
+                    <tr >
+                        <td>{{value.str_time}}</td>
+                        <td>{{value.meet.name}}</td>
+                    </tr>
 
-        {% endfor %}
+                    {% endfor %}
 
-    </table>
+                </table>
 
-</div>
+            </div>
+        </div>
 
-{% endblock %}
+    </div>
+
+    {% endblock %}

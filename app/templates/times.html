@@ -2,58 +2,81 @@
 
 {% block content %}
 
+
 <h1> Times </h1>
 
-<form action="/times" method="POST">
-    <select name="name">
-        {% for player in roster %}
+<div class="card ">
+  <div class="card-content">
+
+    <form action="/times" method="POST">
+      <div class="row">
+        <div class="input-field col s3">
+          <select name="name">
+            {% for player in roster %}
             <option>{{player.name}}</option>
-        {% endfor %}
-    </select>
-    <select name="stroke">
-        {% for stroke in strokes %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="input-field col s3">
+          <select name="stroke">
+            {% for stroke in strokes %}
             <option>{{stroke}}</option>
-        {% endfor %}
-    </select>
-    <select name="distance">
-        {% for distance in distances %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="input-field col s3">
+          <select name="distance">
+            {% for distance in distances %}
             <option>{{distance}}</option>
-        {% endfor %}
-    </select>
-    <select name="meet">
-        {% for meet in meets %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="input-field col s3">
+          <select name="meet">
+            {% for meet in meets %}
             <option>{{meet.name}}</option>
-        {% endfor %}
-    </select>
-    <input type="text" name="time" placeholder="00:00.00">
-    <input type="submit" value="Add Time">
+            {% endfor %}
+          </select>
+        </div>
+      </div>
 
-</form>
 
-<br></br>
-<br></br>
+      <input type="text" name="time" placeholder="00:00.00">
+      <input class="waves-effect waves-light btn" type="submit" value="Add Time">
+
+    </form>
+  </div>
+</div>
+
+
 <h3>Recent Entries</h3>
+
+<div class="card ">
+  <div class="card-content">
+
 
 <div id = "time-table">
 
-    <table>
-         <tr>
-              <th>Name</th>
-              <th>Stroke</th>
-              <th>Time</th>
-              <th>Meet</th>
-         </tr>
+  <table class="bordered">
+   <tr>
+    <th>Name</th>
+    <th>Stroke</th>
+    <th>Time</th>
+    <th>Meet</th>
+  </tr>
 
-         {% for t in times %}
-         <tr>
-              <td><a href = {{"/player?id="+t.player.id|string+"&stroke="+t.stroke+"&distance="+t.distance|string}}>{{t.player.name}}</a></td>
-              <td>{{t.stroke}} {{t.distance|string}}</td>
-              <td>{{t.str_time}}</td>
-              <td>{{t.meet.name}}</td>
-         </tr>
+  {% for t in times %}
+  <tr>
+    <td><a href = {{"/player?id="+t.player.id|string+"&stroke="+t.stroke+"&distance="+t.distance|string}}>{{t.player.name}}</a></td>
+    <td>{{t.stroke}} {{t.distance|string}}</td>
+    <td>{{t.str_time}}</td>
+    <td>{{t.meet.name}}</td>
+  </tr>
 
-         {% endfor %}
-    </table>
+  {% endfor %}
+</table>
+</div>
+</div>
 </div>
 
 {% endblock %}

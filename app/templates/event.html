@@ -2,71 +2,60 @@
 
 {% block content %}
 
-<div id = "event-header-bar">
-     <a href="/event?stroke=free" class="header-link">Free</a>
-     <a href="/event?stroke=back" class="header-link">Backstroke</a>
-     <a href="/event?stroke=fly" class="header-link">Fly</a>
-     <a href="/event?stroke=breast" class="header-link">Breaststroke</a>
-     <a href="/event?stroke=medley" class="header-link">Medley</a>
-</div>
 
 <h1> {{stroke | capitalize}} </h1>
 
 
 {% for event in events %}
-<hr>
-<center><h2>{{event.name}}</h2></center>
-<div id="event-container">
-    <style type="text/css" media="screen">
-        table { border: 1px solid black;float:left;width:500px;}
-        #swimtable {
-            width: 500px;
-            margin: 0 auto;
-        }
-    </style>
-   <div class = "event-box" id = "swimtable">
-       <center><h3>Top Swimmers</h3></center>
-       <table>
-           <tr>
-               <th>Name</th>
-               <th>Time</th>
-               <th>Meet</th>
-           </tr>
 
-           {% for time in event.timesByPlayer %}
-           <tr>
-               <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-               <td>{{time.str_time}}</td>
-               <td>{{time.meet.name}}</td>
-          </tr>
-           {% endfor %}
-       </table>
-   </div>
-   <div class = "event-box" id = "swimtable">
-        <center><h3>Top Times</h3></center>
-        <table>
-             <tr>
-                  <th>Name</th>
-                  <th>Time</th>
-                  <th>Meet</th>
-             </tr>
+<div class="card ">
+    <div class="card-content">
 
-             {% for time in event.totalTimes %}
-             <tr>
-                  <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
-                  <td>{{time.str_time}}</td>
-                  <td>{{time.meet.name}}</td>
-             </tr>
+        <h2>{{event.name}}</h2>
 
-             {% endfor %}
-        </table>
-   </div>
+        <div class = "row">
+            <div class = "col s6">
+                <h3>Top Swimmers</h3>
+                <table class = "bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Time</th>
+                        <th>Meet</th>
+                    </tr>
+
+                    {% for time in event.timesByPlayer %}
+                    <tr>
+                        <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
+                        <td>{{time.str_time}}</td>
+                        <td>{{time.meet.name}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class = "col s6">
+                <h3>Top Times</h3>
+                <table class = "bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Time</th>
+                        <th>Meet</th>
+                    </tr>
+
+                    {% for time in event.totalTimes %}
+                    <tr>
+                        <td><a href = {{"/player?id="+time.player.id|string+"&stroke="+time.stroke+"&distance="+time.distance|string}}>{{time.player.name}}</a></td>
+                        <td>{{time.str_time}}</td>
+                        <td>{{time.meet.name}}</td>
+                    </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 {% endfor %}
-
-
-
-
-
 
 {% endblock %}

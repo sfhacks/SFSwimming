@@ -5,46 +5,21 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-<head>
-<style>
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 300px;
-    margin-top: 150px;
-  }
-  form {
-    margin: 0 auto;
-    width: 152px;
-    margin-top: 100px;
-  }
-  input {
-    display: block;
-    margin-top: 10px;
-  }
-  .b {
-    background-color: #8c4c02;
-    color: white;
-    text-align: center;
-    display: block;
-    font-size: 12px;
-    width: 152px;
-}
-</style>
-</head>
+        <div class="card " id = "login-card">
+            <div class="card-content">
 
-<body>
-  <img src="{{url_for('static', filename='assets/sf-logo.png')}}" alt="Saint Francis Athletics">
+                <img class = "center-align" src="{{url_for('static', filename='assets/sf-logo.png')}}" alt="Saint Francis Athletics">
 
-  <div id = "login-box">
-      <form action="/login" method="POST" id="login-form">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" class="b" value="Log in">
-      </form>
-  </div>
-</body>
+                <div id = "login-box">
+                    <form action="/login" method="POST" id="login-form">
+                        <input type="text" name="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password">
+                        <input class="waves-effect waves-light btn" type="submit" class="b" value="Log in">
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
 {% endif %}
 

@@ -4,13 +4,27 @@
 
 <h1> {{ teamname }} </h1>
 
-<div id = "roster-table">
-    {% for player in roster %}
-    <div class = "player-row">
-        <span class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></span>
-    </div>
 
-    {% endfor %}
+<div class="card ">
+    <div class="card-content">
+
+        <table class = "bordered">
+            <tr>
+                <th>
+                    Name
+                </th>
+            </tr>
+            {% for player in roster %}
+            <tr >
+                <td class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></td>
+            </tr>
+
+            {% endfor %}
+        </div>
+
+    </div>
 </div>
+
+
 
 {% endblock %}

@@ -2,8 +2,12 @@
 
 {% block content %}
 <h1>{{swimmer.name}}</h1>
-<div id = "event-container" class="event-box">
-     <table>
+
+<div class="card ">
+    <div class="card-content">
+
+
+     <table class = "bordered">
          <tr>
              <th>Event</th>
              <th>Time (Most recent)</th>
@@ -19,6 +23,10 @@
          {% endfor %}
 
      </table>
+
+
 </div>
+</div>
+
 
 {% endblock %}

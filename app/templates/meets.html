@@ -4,22 +4,39 @@
 
 <h1> Add Meet </h1>
 
-<form action="/meets" method="POST">
+<div class="card ">
+    <div class="card-content">
 
-    <input type="text" name="name" placeholder="Meet Name">
-    <input type="submit" value="Add Meet">
+        <form action="/meets" method="POST">
 
-    <div id = "roster-table">
-        {% for meet in meets %}
-        <div class = "player-row">
-            <span class = "player-name">{{ meet.name }}</span>
-            <!-- <span class = "delete-button" onClick = "openModal(this)"> Delete </span> -->
+            <input type="text" name="name" placeholder="Meet Name">
+            <input class="waves-effect waves-light btn" type="submit" value="Add Meet">
+
+        </form>
+
+    </div>
+</div>
+
+<div class="card ">
+    <div class="card-content">
+
+        <table class = "bordered">
+            <tr>
+                <th>
+                    Name
+                </th>
+            </tr>
+            {% for meet in meets %}
+            <tr class = "player-row">
+                <td class = "player-name">{{ meet.name }}</span>
+                <!-- <span class = "delete-button" onClick = "openModal(this)"> Delete </span> -->
+            </tr>
+
+            {% endfor %}
         </div>
 
-        {% endfor %}
     </div>
-
-</form>
+</div>
 
 
 {% endblock %}

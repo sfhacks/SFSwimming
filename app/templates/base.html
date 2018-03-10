@@ -2,33 +2,78 @@
 <html>
 <head>
     <title>Swim</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+
     <script
-            src="http://code.jquery.com/jquery-3.3.1.min.js"
-			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			  crossorigin="anonymous"></script>
-<head>
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+
+    <script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+    </script>
+</head>
 
 <body>
+    <nav class = "nav-extended">
+        <div class = "nav-wrapper light-blue lighten-1">
 
-    <div id = "header-bar">
 
-        <div id = "header-bar-left">
-            SFSwim 🏊‍♂️
-            <a href = "/roster" class = "header-link">Full Roster</a>
-            <a href = "/teamroster" class = "header-link">Your Roster</a>
-            <a href = "/times" class = "header-link">Times</a>
-            <a href = "/event?stroke=free" class = "header-link">Events</a>
-            <a href = "/meets" class = "header-link">Meets</a>
-            <a href = "/changeTeam" class = "header-link">Change Team</a>
+
+            <ul class = "left">
+                <li><a href="#">SFSwim 🏊‍♂️</a></li>
+                <li><a href = "/roster" class = "header-link">Full Roster</a></li>
+                <li><a href = "/teamroster" class = "header-link">Your Roster</a></li>
+                <li><a href = "/times" class = "header-link">Times</a></li>
+                <li><a href = "/event?stroke=free" class = "header-link">Events</a></li>
+                <li><a href = "/meets" class = "header-link">Meets</a></li>
+                <li><a href = "/changeTeam" class = "header-link">Change Team</a></li>
+            </ul>
+
+            <ul class="right">
+                <li>{{ team }}</li>
+                {% if not hideLogout %}
+                <li><a href = "/logout" id = "logout" class = "header-link">Logout</a></li>
+                {% endif %}
+            </ul>
+
+
         </div>
 
-        {% if not hideLogout %}
-            {{ team }}
-            <a href = "/logout" id = "logout" class = "header-link">Logout</a>
+        {% if show_extended %}
+        <div class="nav-content ">
+            <ul class="tabs light-blue lighten-3">
+                <li class="tab col s3">
+                    <a target="blank" class={{"active" if stroke == "free" else "_"}}  href="/event?stroke=free" class="header-link">Free</a>
+                </li>
+                <li class="tab col s3">
+                    <a target="blank" class={{"active" if stroke == "back" else "_"}}  href="/event?stroke=back" class="header-link">Back</a>
+                </li>
+                <li class="tab col s3">
+                    <a target="blank" class={{"active" if stroke == "fly" else "_"}} href="/event?stroke=fly" class="header-link">Fly</a>
+                </li>
+                <li class="tab col s3">
+                    <a target="blank" class={{"active" if stroke == "breast" else "_"}} href="/event?stroke=breast" class="header-link">Breast</a>
+                </li>
+                <li class="tab col s3">
+                    <a target="blank" class={{"active" if stroke == "medley" else "_"}} href="/event?stroke=medley" class="header-link">Medley</a>
+                </li>
+            </ul>
+        </div>
         {% endif %}
-    </div>
+    </nav>
 
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div class="container">{% block content %}{% endblock %}</div>
 </body>
 </html>
