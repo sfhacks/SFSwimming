@@ -2,23 +2,17 @@ from mongoengine import *
 import time
 import random
 
-connect( host="mongodb://127.0.0.1:27017/test")
+from "." import Player
+
+sdflkjsldkfj
+
+connect(host="mongodb://127.0.0.1:27017/test")
 
 from faker import Faker
 fake = Faker()
 
 fake.name()
 
-
-
-class Player(Document):
-    name = StringField(max_length=50)
-
-class Time(Document):
-    stroke = StringField()
-    distance = IntField()
-    time = FloatField()
-    player = ReferenceField(Player)
 
 for p in Player.objects:
     print(p.delete())

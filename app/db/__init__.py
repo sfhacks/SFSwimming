@@ -43,25 +43,21 @@ class Player(Document):
     def top_players(stroke, distance, gender, team):
         players = []
         times = []
-        query = Time.objects(stroke=stroke, distance=distance, player__nin=players).order_by("time")
 
-        for time in query:
-            if str(time.player.name) not in players and str(time.player.gender) == gender and str(time.player.team) == team:
-                times.append(time)
-                players.append(time.player.name)
+        for _ in range(5):
+            time = Time.objects(stroke=stroke, distance=distance, player__nin=players, 
+                player__in=Player.objects(gender=gender, team=team)).order_by("time").limit(1)
+            if len(time) == 0:
+                break
 
-        return times[:5]
+            times.append(time[0])
+            players.append(time[0].player)
+
+        return times
 
     @staticmethod
     def filter_by_team(gender, team):
-        players = []
-        query = Player.objects.order_by("name")
-
-        for player in query:
-            if str(player.gender) == gender and str(player.team) == team:
-                players.append(player)
-
-        return players
+        return Player.objects(gender = gender, team = team).order_by("name")
 
     def times(self, stroke = None, distance = None):
         if stroke:
@@ -80,18 +76,15 @@ class Time(Document):
 
     @staticmethod
     def top_times(stroke, distance, gender, team):
-        times = []
-        query = Time.objects(stroke=stroke, distance=distance).order_by("time")
-
-        for time in query:
-            if str(time.player.gender) == gender and str(time.player.team) == team:
-                times.append(time)
-
-        return times[:5]
+        players = Player.objects(gender=gender, team=team)
+        return Time.objects(
+            stroke=stroke, 
+            distance=distance, 
+            player__in=players).order_by("time")[:5]
 
     @staticmethod
     def all_times():
-        return Time.objects.order_by("name")
+        return Time.objects.order_by("name")[:5]
 
     @staticmethod
     def parse_time(str_time):
