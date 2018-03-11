@@ -5,20 +5,47 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-        <div class="card " id = "login-card">
-            <div class="card-content">
 
-                <img class = "center-align" src="{{url_for('static', filename='assets/sf-logo.png')}}" alt="Saint Francis Athletics">
+<head>
+    <style>
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 300px;
+        margin-top: 150px;
+      }
+    </style>
+</head>
 
-                <div id = "login-box">
-                    <form action="/login" method="POST" id="login-form">
-                        <input type="text" name="username" placeholder="Username">
-                        <input type="password" name="password" placeholder="Password">
-                        <input class="waves-effect waves-light btn" type="submit" class="b" value="Log in">
-                    </form>
-                </div>
-            </div>
+<img class = "center-align" src="{{url_for('static', filename='assets/sf-logo.png')}}" alt="Saint Francis Athletics">
+
+<br></br>
+<div class="valign-wrapper row login-box">
+  <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+    <form action="/login" method="POST" id="login-form">
+      <div class="card-content">
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="username">Username</label>
+            <input type="text" class="validate" name="username" id="username" />
+          </div>
+          <div class="input-field col s12">
+            <label for="password">Password </label>
+            <input type="password" class="validate" name="password" id="password" />
+          </div>
         </div>
+
+      </div>
+
+      <div class="card-action right-align">
+          <input type="submit" class="btn light-blue waves-effect waves-light" value="Log in">
+      </div>
+
+    </form>
+  </div>
+</div>
+</form>
 
 
 {% endif %}
