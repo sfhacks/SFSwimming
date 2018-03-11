@@ -29,8 +29,6 @@
     <nav class = "nav-extended">
         <div class = "nav-wrapper light-blue lighten-1">
 
-
-
             <ul class = "left">
                 <li><a href="#">SFSwim 🏊‍♂️</a></li>
                 <li><a href = "/roster" class = "header-link">Full Roster</a></li>
@@ -42,7 +40,7 @@
             </ul>
 
             <ul class="right">
-                <li>{{ team }}</li>
+                <li><b>{{ team }}</b></li>
                 {% if not hideLogout %}
                 <li><a href = "/logout" id = "logout" class = "header-link">Logout</a></li>
                 {% endif %}
