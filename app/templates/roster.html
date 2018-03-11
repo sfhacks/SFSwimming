@@ -45,9 +45,9 @@ function confirmDelete() {
     <span class="close" onClick= "closeModal()">&times;</span>
     <h2>Delete Player</h2>
     <p id = "modal-text">Some text in the Modal.</p>
-
     <span class = "delete-button" onClick = "confirmDelete(this)"> Delete </span>
 </div>
+
 
 <div class="card ">
     <div class="card-content">
@@ -90,7 +90,7 @@ function confirmDelete() {
 
             <tr>
                 <td class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></td>
-                <!-- <td class = "waves-effect waves-light btn red lighten-2" onClick = "openModal(this)"> Delete </td> -->
+{#                 <td class = "delete-button waves-effect waves-light btn-flat red lighten-2 white-text" onClick = "openModal(this)"> Delete </td> #}
             </tr>
 
             {% endfor %}

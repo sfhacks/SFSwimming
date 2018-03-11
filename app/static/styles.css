@@ -33,3 +33,34 @@ h2 {
 #login-card {
     margin-top: 100px;
 }
+
+.delete-button {
+    margin-top: 6px;
+}
+
+#logout-button {
+  padding: 0px 10px;
+}
+
+#nav-title {
+  font-size: 1.5em;
+  background-color: #29b6f6;
+  margin-left: 20px;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  margin-top: 150px;
+}
+
+.footer-copyright {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #64b5f6;
+    text-align: center;
+}

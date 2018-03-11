@@ -2,9 +2,9 @@ from mongoengine import *
 import time
 import random
 
-from "." import Player
+from db import Player, Time, Meet
 
-sdflkjsldkfj
+
 
 connect(host="mongodb://127.0.0.1:27017/test")
 
@@ -20,9 +20,9 @@ for p in Player.objects:
 for t in Time.objects:
     print(t.delete())
 
-for i in range(1000):
-    p = Player(name = fake.name()).save()
-    for i in range(250):
+for i in range(10):
+    p = Player(name = fake.name(), team="Varsity", gender="M").save()
+    for i in range(10):
         Time(stroke="fly", distance=50, time=random.uniform(20,30), player=p).save()
         Time(stroke="free", distance=100, time=random.uniform(20,30), player=p).save()
         Time(stroke="fly", distance=100, time=random.uniform(20,30), player=p).save()

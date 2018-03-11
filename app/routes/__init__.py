@@ -11,7 +11,6 @@ from app.routes.requires_auth import requires_auth
 from app.routes.select_team import select_team
 
 
-
 app.register_blueprint(roster)
 app.register_blueprint(auth)
 app.register_blueprint(event)
@@ -20,6 +19,7 @@ app.register_blueprint(player)
 app.register_blueprint(times)
 app.register_blueprint(teamroster)
 app.register_blueprint(select_team)
+
 
 @app.route('/')
 @requires_auth
