@@ -6,32 +6,33 @@
 
 console.log("test");
 
-player = ""
 row = undefined;
-function openModal(tag, name) {
-    console.log(name);
-    $(".modal").show()
-    player = $(tag).parent().find(".player-name").text()
-    row = $(tag).parent()
-    $("#modal-text").text("Are you sure you want to delete " + player + "?")
-}
+name = ""
 
-function closeModal() {
-    $(".modal").hide()
-}
+$(() => {
+    $(".delete-button").on("click", function() {
+        name = $(this).parent().parent().find(".player-name").find("a").text()
+        row = $(this).parent().parent()
+        $("#modal-message").text("Are you sure you want to delete " + name + " ?")
 
-function confirmDelete() {
-    console.log("Test");
-    $(".modal").hide()
-    row.remove()
-    $.ajax({
-        url: '/roster?name='+player,
-        type: 'DELETE',
-        success: function(data, textStatus) {
-            console.log("Delete successful!");
-        }
-    });
-}
+        $('#modal1').modal('open');
+        
+    })
+
+    $(".delete").on("click", function() {
+        row.remove()
+        $.ajax({
+            url: '/roster?name='+name,
+            type: 'DELETE',
+            success: function(data, textStatus) {
+                console.log("Delete successful!");
+            }
+        });
+        $("#modal1").modal("close")
+    })
+})
+
+
 
 </script>
 
@@ -41,12 +42,25 @@ function confirmDelete() {
 <!-- The Modal -->
 
 <!-- Modal content -->
-<div class="modal">
+{# <div class="modal">
     <span class="close" onClick= "closeModal()">&times;</span>
     <h2>Delete Player</h2>
     <p id = "modal-text">Some text in the Modal.</p>
     <span class = "delete-button" onClick = "confirmDelete(this)"> Delete </span>
-</div>
+</div> #}
+
+
+<!-- Modal Structure -->
+ <div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4 id = "modal-message">Are you sure you want to delete</h4>
+     <p>All associated times will be deleted too.</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect waves-grey btn-flat">Cancel</a>
+     <a href="#!" class="delete waves-effect waves-grey btn-flat red lighten-1 white-text">Delete</a>
+   </div>
+ </div>
 
 
 <div class="card ">
@@ -81,16 +95,19 @@ function confirmDelete() {
     <div class="card-content">
         <table class = "bordered">
             <tr>
-                <th>
+                <th align = "right">
                     Name
                 </th>
-                <th></th>
+                <th align="right"></th>
             </tr>
             {% for player in roster %}
 
             <tr>
                 <td class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></td>
-{#                 <td class = "delete-button waves-effect waves-light btn-flat red lighten-2 white-text" onClick = "openModal(this)"> Delete </td> #}
+                <td class = "action-td">
+                    <span class="delete-button waves-effect waves-light btn-flat modal-trigger red lighten-2 white-text right-align" href="#modal1">Delete</span>
+                </td>
+                
             </tr>
 
             {% endfor %}

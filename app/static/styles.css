@@ -35,7 +35,7 @@ h2 {
 }
 
 .delete-button {
-    margin-top: 6px;
+    /*margin-top: -5px;*/
 }
 
 #logout-button {
@@ -63,4 +63,13 @@ img {
     width: 100%;
     background-color: #64b5f6;
     text-align: center;
+}
+
+td {
+  /*padding: 15px;*/
+}
+
+.action-td {
+  display: flex;
+  justify-content: flex-end;
 }
