@@ -14,3 +14,11 @@ def meets():
 def add_meet():
     Meet(name = request.form["name"]).save()
     return redirect("/meets")
+
+@meet.route('/meet', methods=['DELETE'])
+@requires_auth
+def delete_swimmer():
+    name = request.args["name"]
+    Meet.remove(name)
+
+    return "Success", 200

@@ -35,7 +35,7 @@ h2 {
 }
 
 .delete-button {
-    /*margin-top: -5px;*/
+  padding: 0px 8px;
 }
 
 #logout-button {
@@ -72,4 +72,5 @@ td {
 .action-td {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }

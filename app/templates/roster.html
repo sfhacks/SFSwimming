@@ -3,20 +3,16 @@
 {% block content %}
 
 <script>
-
-console.log("test");
-
 row = undefined;
 name = ""
 
 $(() => {
     $(".delete-button").on("click", function() {
-        name = $(this).parent().parent().find(".player-name").find("a").text()
-        row = $(this).parent().parent()
+        name = $(this).closest("tr").find("a").text()
+        row = $(this).closest("tr")
         $("#modal-message").text("Are you sure you want to delete " + name + " ?")
 
         $('#modal1').modal('open');
-        
     })
 
     $(".delete").on("click", function() {
@@ -31,8 +27,6 @@ $(() => {
         $("#modal1").modal("close")
     })
 })
-
-
 
 </script>
 
@@ -105,7 +99,7 @@ $(() => {
             <tr>
                 <td class = "player-name"><a href = {{"/playerProfile?id="+player.id|string}}>{{ player.name }}</a></td>
                 <td class = "action-td">
-                    <span class="delete-button waves-effect waves-light btn-flat modal-trigger red lighten-2 white-text right-align" href="#modal1">Delete</span>
+                    <span class="delete-button waves-effect waves-light btn-flat modal-trigger red lighten-2 white-text right-align" href="#modal1"><i class="material-icons">delete</i></span>
                 </td>
                 
             </tr>

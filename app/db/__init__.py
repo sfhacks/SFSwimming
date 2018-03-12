@@ -21,6 +21,14 @@ class Meet(Document):
     def add(name):
         Meet(name = name).save()
 
+    @staticmethod
+    def remove(name):
+        m = Meet.objects.get(name=name)
+        times = Time.objects(meet=m)
+        for time in times:
+            time.delete()
+        m.delete()
+
 
 class Player(Document):
     name = StringField(max_length=50)

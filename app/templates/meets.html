@@ -2,7 +2,51 @@
 
 {% block content %}
 
-<h1> Add Meet </h1>
+
+<script>
+row = undefined;
+name = ""
+
+$(() => {
+    $(".delete-button").on("click", function() {
+        name = $(this).closest("tr").find(".meet-name").text()
+        row = $(this).closest("tr")
+        $("#modal-message").text("Are you sure you want to delete " + name + " ?")
+        $('#modal1').modal('open');
+    })
+
+    $(".delete").on("click", function() {
+        $.ajax({
+            url: '/meet?name='+name,
+            type: 'DELETE',
+            success: function(data, textStatus) {
+                console.log("Delete successful!");
+                row.remove()
+            }
+        });
+        $("#modal1").modal("close")
+    })
+})
+
+</script>
+
+<h1> Roster </h1>
+
+
+
+
+<!-- Modal Structure -->
+ <div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4 id = "modal-message">Are you sure you want to delete</h4>
+     <p>All associated times will be deleted too.</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect waves-grey btn-flat">Cancel</a>
+     <a href="#!" class="delete waves-effect waves-grey btn-flat red lighten-1 white-text">Delete</a>
+   </div>
+ </div>
+
 
 <div class="card ">
     <div class="card-content">
@@ -25,11 +69,14 @@
                 <th>
                     Name
                 </th>
+                <th></th>
             </tr>
             {% for meet in meets %}
-            <tr class = "player-row">
-                <td class = "player-name">{{ meet.name }}</span>
-                <!-- <span class = "delete-button" onClick = "openModal(this)"> Delete </span> -->
+            <tr>
+                <td class = "meet-name">{{ meet.name }}</span>
+                <td class = "action-td">
+                    <span class="delete-button waves-effect waves-light btn-flat modal-trigger red lighten-2 white-text right-align" href="#modal1"><i class="material-icons">delete</i></span>
+                </td>
             </tr>
 
             {% endfor %}
