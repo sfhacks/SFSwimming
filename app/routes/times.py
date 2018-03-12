@@ -15,7 +15,7 @@ def list_all_times():
     times = Time.all_times()
     roster = Player.all()
     meets = Meet.all()
-    template = render_template('times.html', roster = roster, strokes = event_names, distances = event_distances, meets = meets, times = times)
+    template = render_template('times.html', roster = roster, strokes = event_names, distances = event_distances, meets = meets, times = times, path="times")
     return template
 
 @times.route('/times', methods=['POST'])

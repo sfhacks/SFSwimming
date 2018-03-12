@@ -7,7 +7,7 @@ meet = Blueprint('meet', __name__, template_folder='templates')
 @meet.route('/meets', methods=['GET'])
 @requires_auth
 def meets():
-    return render_template("meets.html", meets = Meet.all())
+    return render_template("meets.html", meets = Meet.all(), path="meets")
 
 @meet.route('/meets', methods=['POST'])
 @requires_auth

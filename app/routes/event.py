@@ -21,4 +21,4 @@ def show_event():
                 "totalTimes": Time.top_times(stroke, event["distance"], gender, team)
             })
 
-    return render_template('event.html', stroke=stroke, events=data, show_extended=True)
+    return render_template('event.html', stroke=stroke, events=data, show_extended=True, path="events")

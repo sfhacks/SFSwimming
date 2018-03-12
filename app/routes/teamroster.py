@@ -16,4 +16,4 @@ def main():
 
     print(teamname)
 
-    return render_template('teamroster.html', roster = Player.filter_by_team(gender, team), teamname = teamname)
+    return render_template('teamroster.html', roster = Player.filter_by_team(gender, team), teamname = teamname, path = "team_roster")

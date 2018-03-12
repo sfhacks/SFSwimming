@@ -55,11 +55,11 @@
 
             <ul class = "left">
                 <li id="nav-title">SFSwim 🏊‍♂️</li>
-                <li><a href = "/roster" class = "header-link">Full Roster</a></li>
-                <li><a href = "/teamroster" class = "header-link">Your Roster</a></li>
-                <li><a href = "/times" class = "header-link">Times</a></li>
-                <li><a href = "/event?stroke=free" class = "header-link">Events</a></li>
-                <li><a href = "/meets" class = "header-link">Meets</a></li>
+                <li class = {{"active" if path=="roster" else "_"}} ><a href = "/roster" class = "header-link">Full Roster</a></li>
+                <li class = {{"active" if path=="team_roster" else "_"}}><a href = "/teamroster" class = "header-link">Your Roster</a></li>
+                <li class = {{"active" if path=="times" else "_"}}><a href = "/times" class = "header-link">Times</a></li>
+                <li class = {{"active" if path=="events" else "_"}}><a href = "/event?stroke=free" class = "header-link">Events</a></li>
+                <li class = {{"active" if path=="meets" else "_"}}><a href = "/meets" class = "header-link">Meets</a></li>
                 {# <li><a href = "/changeTeam" class = "header-link">Change Team</a></li> #}
             </ul>
 

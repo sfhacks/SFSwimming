@@ -10,7 +10,7 @@ roster = Blueprint('roster', __name__, template_folder='templates')
 @roster.route('/roster', methods=['GET'])
 @requires_auth
 def main():
-    return render_template('roster.html', roster = Player.all(), genders = genders, teams = teams)
+    return render_template('roster.html', roster = Player.all(), genders = genders, teams = teams, path = "roster")
 
 @roster.route('/roster', methods=['POST'])
 @requires_auth
