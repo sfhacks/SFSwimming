@@ -7,9 +7,9 @@ select_team = Blueprint('select_team', __name__, template_folder='templates')
 def select():
     session['team'] = request.args.get('team')
     session['gender'] = request.args.get('gender')
-    return redirect("/roster")
+    return "", 200
 
-@select_team.route('/changeTeam', methods=['GET'])
-@requires_auth
-def change():
-    return render_template("select_team.html")
+# @select_team.route('/changeTeam', methods=['GET'])
+# @requires_auth
+# def change():
+#     return render_template("select_team.html")

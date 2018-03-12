@@ -22,11 +22,33 @@
     <script>
     $(document).ready(function() {
         $('select').material_select();
+
+        $("a[path]").on("click", function(){
+            path = $(this).attr("path")
+            $.ajax({
+                url: path,
+                type: 'GET',
+                success: function(data, textStatus) {
+                    location.reload()
+                }
+            });
+        })
     });
+
+
+
     </script>
 </head>
 
 <body>
+    <ul id="dropdown1" class="dropdown-content">
+      <li><a path="/selectTeam?team=Varsity&gender=M">Boys Varsity</a></li>
+      <li><a path="/selectTeam?team=Junior%20Varsity&gender=M">Boys JV</a></li>
+      <li><a path="/selectTeam?team=Gold&gender=M">Boys Gold</a></li>
+      <li><a path="/selectTeam?team=Varsity&gender=F">Girls Varsity</a></li>
+      <li><a path="/selectTeam?team=Junior%20Varsity&gender=F">Girls JV</a></li>
+      <li><a path="/selectTeam?team=Gold&gender=F">Girls Gold</a></li>
+    </ul>
     <nav class = "nav-extended">
         <div class = "nav-wrapper light-blue lighten-1">
 
@@ -37,13 +59,16 @@
                 <li><a href = "/times" class = "header-link">Times</a></li>
                 <li><a href = "/event?stroke=free" class = "header-link">Events</a></li>
                 <li><a href = "/meets" class = "header-link">Meets</a></li>
-                <li><a href = "/changeTeam" class = "header-link">Change Team</a></li>
+                {# <li><a href = "/changeTeam" class = "header-link">Change Team</a></li> #}
             </ul>
 
             <ul class="right">
-                <li><b>{{ team }}</b></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><b>{{ team }}</b><i class="material-icons right">arrow_drop_down</i></a></li>
+                {# <li><b>{{ team }}</b></li> #}
                 {% if not hideLogout %}
-                <li><a id = "logout-button" class="btn-flat white light-blue-text" href = "/logout" id = "logout" class = "header-link" >Logout</a></li>
+                <li>
+                    <a id = "logout-button" class="btn-flat white light-blue-text" href = "/logout" id = "logout" class = "header-link">Logout</a>
+                </li>
                 {% endif %}
             </ul>
 
