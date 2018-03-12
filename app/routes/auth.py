@@ -18,7 +18,7 @@ def main():
         abort(400)
     if validate_pwd(request.form['password']) and request.form['username'] == 'admin':
         session['logged_in'] = True
-        return render_template("select_team.html")
+        return redirect("/roster")
     else:
         return redirect("/login")
 
