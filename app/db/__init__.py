@@ -71,9 +71,9 @@ class Player(Document):
 
     def times(self, stroke = None, distance = None):
         if stroke:
-            return Time.objects(stroke=stroke, distance=distance, player=self).order_by("-id")
+            return Time.objects(stroke=stroke, distance=distance, player=self).order_by("-date")
         else:
-            return Time.objects(player=self).order_by("-id")
+            return Time.objects(player=self).order_by("-date")
 
 
 class Time(Document):
@@ -83,6 +83,7 @@ class Time(Document):
     player = ReferenceField(Player)
     meet = ReferenceField(Meet)
     str_time = StringField()
+    date = DateTimeField()
 
     @staticmethod
     def top_times(stroke, distance, gender, team):

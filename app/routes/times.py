@@ -2,6 +2,7 @@ from flask import *
 from app.db import *
 from app.routes.requires_auth import *
 from app.config import events
+from dateutil.parser import parse
 
 
 event_names = list(set([event['stroke'] for event in events]))
@@ -21,11 +22,19 @@ def list_all_times():
 @times.route('/times', methods=['POST'])
 @requires_auth
 def add_time():
+
+    date = request.form["date"]
+
+
+    print(parse(date))
+
     player = Player.objects.get(name = request.form["name"])
     meet = Meet.objects.get(name = request.form["meet"])
     time_seconds = Time.parse_time(request.form["time"])
     str_time = Time.reverse_time(time_seconds)
 
-    Time(stroke = request.form["stroke"], distance = int(request.form["distance"]), time = time_seconds, player = player.id, meet = meet, str_time = str_time).save()
+
+    Time(stroke = request.form["stroke"], distance = int(request.form["distance"]), 
+        time = time_seconds, player = player.id, meet = meet, str_time = str_time, date = date).save()
 
     return redirect("/times")
