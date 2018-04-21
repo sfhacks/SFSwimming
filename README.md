@@ -7,3 +7,5 @@
 ## Installation
 * Download `docker-compose.yml` into a new directory
 * `docker-compose pull && docker-compose build && docker-compose up -d`
+
+# Changes
