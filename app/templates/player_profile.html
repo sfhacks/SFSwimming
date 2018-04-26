@@ -12,12 +12,14 @@
              <th>Event</th>
              <th>Time (Most recent)</th>
              <th>Meet</th>
+             <th>Date</th>
          </tr>
          {% for value in values %} <!-- At most, the last 5 values -->
          <tr >
               <td><a href= {{"/player?id="+swimmer.id|string+"&stroke="+value.stroke+"&distance="+value.distance|string}}>{{value.distance|string + " " + value.stroke}}</a></td>
              <td>{{value.str_time}}</td>
              <td>{{value.meet.name}}</td>
+             <td>{{value.date.strftime("%Y-%m-%d")}}</td>
          </tr>
 
          {% endfor %}

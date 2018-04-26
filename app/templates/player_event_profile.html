@@ -21,9 +21,15 @@
     <script>
 
     all = [{% for item in values %} {{item.time}}, {% endfor %}]
+    dates = [{% for item in values %} {{item.date.strftime("%m/%d/%y")}}, {% endfor %}]
+    formatted_dates = []
+    for (var date in dates) {
+        var str_date = String(date)
+        formatted_dates.push(str_date)
+    }
 
     var data = {
-        labels : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        labels : formatted_dates,
         datasets : [
             {
                 fillColor: "rgba(151,187,205,0.2)",
@@ -33,7 +39,7 @@
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(151,187,205,1)",
                 bezierCurve : false,
-                data : all.reverse().slice(all.length-10, all.length)
+                data : all.reverse()
             }]
         }
 
@@ -72,7 +78,7 @@
                     <tr >
                         <td>{{value.str_time}}</td>
                         <td>{{value.meet.name}}</td>
-                        <td>{{value.date}}</td>
+                        <td>{{value.date.strftime("%y-%m-%d")}}</td>
                     </tr>
 
                     {% endfor %}
